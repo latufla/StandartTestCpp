@@ -2,6 +2,10 @@
 #include "interfaces\IWorld.h"
 #include <unordered_map>
 
+// default
+// now objects just falling with const speed
+// but it`s still a world simulation
+// use phys engine here if needed
 namespace sqw{
 	class World : public IWorld{
 	public:

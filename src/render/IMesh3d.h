@@ -12,7 +12,7 @@ namespace sqr {
 
 	class IMesh3d {
 	public:
-		virtual std::vector<std::shared_ptr<IVertex3d>> getVertices() = 0;
-		virtual std::vector<uint16_t> getIndices() = 0;
+		virtual std::vector<std::shared_ptr<IVertex3d>>& getVertices() = 0;
+		virtual std::vector<uint16_t>& getIndices() = 0;
 	};
 }

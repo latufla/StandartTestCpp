@@ -2,7 +2,7 @@
 //
 
 #include "src/SharedHeaders.h"
-#include "src/render/Renderer.h"
+#include "src/render/RenderEngine.h"
 #include "src/render/AssetLoader.h"
 #include "src/render/View.h"
 #include "src/render/Model3d.h"
@@ -12,12 +12,12 @@ long long getElapsedTimeMSec();
 
 int _tmain(int argc, _TCHAR* argv[]) {
 	auto assetLoader = std::make_shared<sqr::AssetLoader>();
-	sqr::Renderer renderer(assetLoader);
+	sqr::RenderEngine renderer(assetLoader);
 
 	std::array<float, 4> color = {0.0f, 0.0f, 1.0f, 1.0f};
 	auto view = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, color);
 	auto view2 = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, color);
-	view2->translate(0.5f, 0.5f, 0.0f);
+	view2->translate(0.6f, 0.6f, 0.0f);
 	view2->scale(0.5f, 0.5f, 0.5f);
 	renderer.addObject(1, view);
 	renderer.addObject(2, view2);

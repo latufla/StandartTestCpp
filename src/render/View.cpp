@@ -1,13 +1,9 @@
 #include "View.h"
+#include <gtc\matrix_transform.hpp>
 
 namespace sqr{	
 	View::View(std::string modelKeyName, const std::array<float, 4>& color) 
 		: modelKeyName(modelKeyName), color(color) {
-
-		for(uint8_t i = 0; i < transform.size(); i++) {
-			transform[i] = 0;
-		}
-		scale(1.0f, 1.0f, 1.0f);
 	}
 
 	View::~View() {
@@ -17,11 +13,11 @@ namespace sqr{
 		return modelKeyName;
 	}
 
-	void View::setTransform(std::array<float, 16> val) {
+	void View::setTransform(glm::mat4& val) {
 		transform = val;
 	}
 
-	std::array<float, 16>& View::getTransform() {
+	glm::mat4 View::getTransform() {
 		return transform;
 	}
 
@@ -30,15 +26,10 @@ namespace sqr{
 	}
 
 	void View::translate(float x, float y, float z) {
-		transform[12] = x;
-		transform[13] = y;
-		transform[14] = z;
+		transform = glm::translate(transform, glm::vec3{x, y, z});
 	}
 
 	void View::scale(float x, float y, float z) {
-		transform[0] = x;
-		transform[5] = y;
-		transform[10] = z;
-		transform[15] = 1.0f;
+		transform = glm::scale(transform, glm::vec3{x, y, z});
 	}
 }

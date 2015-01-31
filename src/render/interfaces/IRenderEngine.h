@@ -4,7 +4,7 @@
 #include "IView.h"
 
 namespace sqr {
-	class IRenderer {
+	class IRenderEngine {
 	public:
 		virtual void addObject(uint32_t id, std::shared_ptr<IView> object) = 0;
 		virtual void removeObject(uint32_t id) = 0;
@@ -12,5 +12,8 @@ namespace sqr {
 		virtual std::shared_ptr<IView> getObjectBy(uint32_t id) = 0;
 
 		virtual bool doStep(double step) = 0;
+
+		virtual bool getMouseLeftDown() = 0;
+		virtual int32_t getMouseOver() = 0;
 	};
 }

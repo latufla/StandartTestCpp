@@ -11,8 +11,8 @@ namespace sqr {
 
 		virtual std::string getModelKeyName() override;
 
-		virtual void setTransform(std::array<float, 16>) override;
-		virtual std::array<float, 16>& getTransform() override;
+		virtual void setTransform(glm::mat4&) override;
+		virtual glm::mat4 getTransform() override;
 
 		virtual std::array<float, 4>& getColor() override;
 
@@ -20,7 +20,7 @@ namespace sqr {
 		virtual void scale(float x, float y, float z) override;
 	private:
 		std::string modelKeyName;
-		std::array<float, 16> transform;
+		glm::mat4 transform;
 
 		std::array<float, 4> color;
 	};

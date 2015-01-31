@@ -2,15 +2,14 @@
 
 
 namespace sqr{	
-	Vertex3d::Vertex3d(const std::array<float, 3>& position) 
+	Vertex3d::Vertex3d(const glm::vec3& position)
 		: position(position) {
-
 	}
 
 	Vertex3d::~Vertex3d() {
 	}
 
-	std::array<float, 3>& Vertex3d::getPosition() {
+	glm::vec3& Vertex3d::getPosition() {
 		return position;
 	}
 }

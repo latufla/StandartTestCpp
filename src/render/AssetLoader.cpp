@@ -44,11 +44,12 @@ namespace sqr{
 
 		std::vector<std::shared_ptr<IVertex3d>> vertices;
 		for(uint32_t i = 0; i < shape.size(); i += 3) {
-			std::array <float, 3> v = {
-				shape[i],
-				shape[i + 1],
-				shape[i + 2]
-			};
+// 			std::array <float, 3> v = {
+// 				shape[i],
+// 				shape[i + 1],
+// 				shape[i + 2]
+// 			};
+			glm::vec3 v{shape[i], shape[i + 1], shape[i + 2]};
 			auto vertex = std::make_shared<Vertex3d>(v);
 			vertices.push_back(vertex);
 		}

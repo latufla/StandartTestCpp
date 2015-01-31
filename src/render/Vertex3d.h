@@ -5,14 +5,14 @@ namespace sqr{
 	class Vertex3d : public IVertex3d {
 	public:
 		Vertex3d() = delete;
-		Vertex3d(const std::array<float, 3>& position);
+		Vertex3d(const glm::vec3& position);
 	
 		virtual ~Vertex3d();
 	
-		virtual std::array<float, 3>& getPosition() override;
+		virtual glm::vec3& getPosition() override;
 	
 	protected:
-		std::array<float, 3> position;
+		glm::vec3 position;
 	};
 }
 

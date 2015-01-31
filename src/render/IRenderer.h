@@ -5,6 +5,7 @@
 
 namespace sqr {
 	class IRenderer {
+	public:
 		virtual void addObject(uint32_t id, std::shared_ptr<IView> object) = 0;
 		virtual void removeObject(uint32_t id) = 0;
 

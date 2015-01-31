@@ -6,6 +6,7 @@
 
 namespace sqr {
 	class IModel3d {
+	public:
 		virtual std::vector<std::shared_ptr<IMesh3d>>& getMeshes() = 0;
 		virtual std::string getKeyName() = 0;
 	};

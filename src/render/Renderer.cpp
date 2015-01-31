@@ -11,15 +11,15 @@ namespace sqr{
 	}
 
 	void Renderer::addObject(uint32_t id, shared_ptr<IView> object) {
-		objects.emplace(id, object);
+		idToObject.emplace(id, object);
 	}
 
 	void Renderer::removeObject(uint32_t id) {
-		objects.erase(id);
+		idToObject.erase(id);
 	}
 
 	shared_ptr<IView> Renderer::getObjectBy(uint32_t id) {
-		return objects.at(id);
+		return idToObject.at(id);
 	}
 
 	bool Renderer::doStep(double step) {

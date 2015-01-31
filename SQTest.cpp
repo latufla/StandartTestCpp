@@ -3,9 +3,14 @@
 
 #include "src/SharedHeaders.h"
 #include <SFML/Graphics.hpp>
+#include "src/render/Renderer.h"
+#include "src/render/AssetLoader.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	auto assetLoader = std::make_shared<sqr::AssetLoader>();
+	sqr::Renderer renderer(assetLoader);
+
 	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);

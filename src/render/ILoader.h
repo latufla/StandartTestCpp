@@ -5,6 +5,7 @@
 
 namespace sqr {
 	class ILoader {
-		virtual std::shared_ptr<IModel3d> getModel3d() = 0;
+	public:
+		virtual std::shared_ptr<IModel3d> getModel3dBy(std::string keyName) = 0;
 	};
 }

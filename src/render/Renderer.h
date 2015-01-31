@@ -4,7 +4,7 @@
 #include "ILoader.h"
 #include <unordered_map>
 
-// default renderer
+// default
 namespace sqr {
 	class Renderer : public IRenderer {
 	public:
@@ -13,15 +13,15 @@ namespace sqr {
 
 		virtual ~Renderer();
 	
-		virtual void addObject(uint32_t id, std::shared_ptr<IView> object);
-		virtual void removeObject(uint32_t id);
+		virtual void addObject(uint32_t id, std::shared_ptr<IView> object) override;
+		virtual void removeObject(uint32_t id) override;
 
-		virtual std::shared_ptr<IView> getObjectBy(uint32_t id);
+		virtual std::shared_ptr<IView> getObjectBy(uint32_t id) override;
 
-		virtual bool doStep(double step);
+		virtual bool doStep(double step) override;
 
 	protected:
 		std::shared_ptr<ILoader> assetLoader;
-		std::unordered_map<uint32_t, std::shared_ptr<IView>> objects;
+		std::unordered_map<uint32_t, std::shared_ptr<IView>> idToObject;
 	};
 }

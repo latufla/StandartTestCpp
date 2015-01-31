@@ -4,7 +4,7 @@
 namespace sqr {
 	class Model3d : public IModel3d{
 	public:
-		Model3d() {};
+		Model3d() = delete;
 		Model3d(std::string keyName, std::vector<std::shared_ptr<IMesh3d>>& meshes);
 		
 		virtual ~Model3d();

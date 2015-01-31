@@ -5,11 +5,17 @@
 #include <SFML/Graphics.hpp>
 #include "src/render/Renderer.h"
 #include "src/render/AssetLoader.h"
+#include "src/render/View.h"
+#include "src/render/Model3d.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	auto assetLoader = std::make_shared<sqr::AssetLoader>();
 	sqr::Renderer renderer(assetLoader);
+
+	std::array<float, 16> transform;
+	auto view = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, transform);
+	renderer.addObject(1, view);
 
 	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 	sf::CircleShape shape(100.f);

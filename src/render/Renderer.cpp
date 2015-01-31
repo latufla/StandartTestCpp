@@ -39,7 +39,7 @@ namespace sqr{
 		
 		window->clear(sf::Color::Black);
 		
-		glDisable(GL_LIGHTING);
+		glDisable(GL_LIGHTING); 
 		glViewport(0, 0, window->getSize().x, window->getSize().y);
 		
 		glEnableClientState(GL_VERTEX_ARRAY);
@@ -76,7 +76,7 @@ namespace sqr{
 				auto transform = view->getTransform();
 				glLoadMatrixf(&transform[0]);
 
-				glDrawArrays(GL_TRIANGLES, 0, 6);
+				glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 			}
 		}
 		window->display();

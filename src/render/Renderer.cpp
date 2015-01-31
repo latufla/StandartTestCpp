@@ -2,9 +2,12 @@
 
 using std::shared_ptr;
 
+
 namespace sqr{
 	Renderer::Renderer(shared_ptr<ILoader> assetLoader) 
 		:assetLoader(assetLoader) {
+
+		window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1024, 768), "SFML");
 	}
 	
 	Renderer::~Renderer() {
@@ -23,6 +26,18 @@ namespace sqr{
 	}
 
 	bool Renderer::doStep(double step) {
+		if(!window->isOpen())
+			return false;
+
+		sf::Event event;
+		while(window->pollEvent(event)) {
+			if(event.type == sf::Event::Closed)
+				window->close();
+		}
+
+		window->clear();
+		window->display();
+
 		return true;
 	}
 

@@ -4,7 +4,12 @@
 #include "interfaces/ILoader.h"
 #include <unordered_map>
 
+#include <SFML/Graphics.hpp>
+
 // default
+// should impl one more connector to sfml and gl
+// and add components to renderer
+// but it`s not a spaceship
 namespace sqr {
 	class Renderer : public IRenderer {
 	public:
@@ -23,5 +28,7 @@ namespace sqr {
 	protected:
 		std::shared_ptr<ILoader> assetLoader;
 		std::unordered_map<uint32_t, std::shared_ptr<IView>> idToObject;
+
+		std::shared_ptr<sf::RenderWindow> window;
 	};
 }

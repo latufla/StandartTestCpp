@@ -5,7 +5,7 @@
 #include <array>
 
 namespace sqr {
-	class IVertex3d {
+	class IVertex3d { // sorry bout that - max extensibility, min c++ 
 	public:
 		virtual std::array<float, 3>& getPosition() = 0;
 	};

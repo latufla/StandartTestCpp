@@ -2,14 +2,15 @@
 //
 
 #include "src/SharedHeaders.h"
-#include <SFML/Graphics.hpp>
 #include "src/render/Renderer.h"
 #include "src/render/AssetLoader.h"
 #include "src/render/View.h"
 #include "src/render/Model3d.h"
+#include <chrono>
 
-int _tmain(int argc, _TCHAR* argv[])
-{
+long long getElapsedTimeMSec();
+
+int _tmain(int argc, _TCHAR* argv[]) {
 	auto assetLoader = std::make_shared<sqr::AssetLoader>();
 	sqr::Renderer renderer(assetLoader);
 
@@ -17,22 +18,24 @@ int _tmain(int argc, _TCHAR* argv[])
 	auto view = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, transform);
 	renderer.addObject(1, view);
 
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
-	while(window.isOpen()) {
-		sf::Event event;
-		while(window.pollEvent(event)) {
-			if(event.type == sf::Event::Closed)
-				window.close();
+	const uint32_t step = 1000 / 60;
+	long long begin = getElapsedTimeMSec();
+	bool running = true;
+	while(running) {
+		long long elapsedTime = getElapsedTimeMSec() - begin;
+		if(elapsedTime >= step) {
+			running = renderer.doStep(step);
+			begin = getElapsedTimeMSec() - (elapsedTime - step);
 		}
-
-		window.clear();
-		window.draw(shape);
-		window.display();
 	}
-
 	return 0;
 }
+
+long long getElapsedTimeMSec() {
+	using namespace std::chrono;
+	auto now = high_resolution_clock::now();
+	auto mSec = duration_cast<milliseconds>(now.time_since_epoch());
+	return mSec.count();
+}
+
 

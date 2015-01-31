@@ -7,6 +7,8 @@
 #include "src/render/View.h"
 #include "src/render/Model3d.h"
 #include <chrono>
+#include "src/world/World.h"
+#include "src/world/Object.h"
 
 long long getElapsedTimeMSec();
 
@@ -16,11 +18,17 @@ int _tmain(int argc, _TCHAR* argv[]) {
 
 	auto color = glm::vec4{0.0f, 0.0f, 1.0f, 1.0f};
 	auto view = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, color);
-	auto view2 = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, color);
-	view2->translate(0.6f, 0.6f, 0.0f);
-	view2->scale(0.5f, 0.5f, 0.5f);
+// 	auto view2 = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, color);
+// 	view2->translate(0.6f, 0.6f, 0.0f);
+// 	view2->scale(0.5f, 0.5f, 0.5f);
 	renderer.addObject(1, view);
-	renderer.addObject(2, view2);
+//	renderer.addObject(2, view2);
+
+	sqw::World world;
+	auto object = std::make_shared<sqw::Object>();
+	auto& speed = object->getSpeed();
+	speed.y = -0.000001f;
+	world.addObject(1, object);
 
 	const uint32_t step = 1000 / 60;
 	long long begin = getElapsedTimeMSec();
@@ -29,6 +37,11 @@ int _tmain(int argc, _TCHAR* argv[]) {
 		long long elapsedTime = getElapsedTimeMSec() - begin;
 		if(elapsedTime >= step) {
 			running = renderer.doStep(step);
+			world.doStep(step);
+			
+			auto pos = object->getPosition();
+			view->translate(pos.x, pos.y, 0.0f);
+
 			begin = getElapsedTimeMSec() - (elapsedTime - step);
 		}
 	}

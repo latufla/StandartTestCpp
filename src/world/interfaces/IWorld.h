@@ -1,8 +1,10 @@
 #pragma once
+#include "../../SharedHeaders.h"
 #include <memory>
+#include "IObject.h"
 
 namespace sqw {
-	class IObject {
+	class IWorld {
 	public:		
 		virtual void addObject(uint32_t id, std::shared_ptr<IObject> object) = 0;
 		virtual void removeObject(uint32_t id) = 0;

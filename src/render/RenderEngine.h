@@ -39,6 +39,5 @@ namespace sqr {
 		std::unordered_map<uint32_t, std::shared_ptr<IView>> idToObject;
 
 		std::shared_ptr<sf::RenderWindow> window;
-
 	};
 }

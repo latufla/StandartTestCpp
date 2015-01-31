@@ -2,7 +2,7 @@
 #include <gtc\matrix_transform.hpp>
 
 namespace sqr{	
-	View::View(std::string modelKeyName, const std::array<float, 4>& color) 
+	View::View(std::string modelKeyName, const glm::vec4& color) 
 		: modelKeyName(modelKeyName), color(color) {
 	}
 
@@ -21,7 +21,7 @@ namespace sqr{
 		return transform;
 	}
 
-	std::array<float, 4>& View::getColor() {
+	glm::vec4& View::getColor() {
 		return color;
 	}
 

@@ -55,10 +55,6 @@ namespace sqr{
 		}
 		
 		window->clear(sf::Color::Black);
-		
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		glDisable(GL_LIGHTING); 
 
 		auto wSize = window->getSize();
 		glViewport(0, 0, wSize.x, wSize.y);
@@ -71,9 +67,18 @@ namespace sqr{
 		
 		float ratio = (float)wSize.x / (float)wSize.y;
 		mat4 projection = ortho(-ratio, ratio, -1.f, 1.f);
+		
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(&projection[0][0]);
+		
+		glMatrixMode(GL_MODELVIEW);
 
 		for(auto& i : idToObject) {
-			auto view = i.second;
+			auto view = i.second;		
+
+			auto transform = view->getTransform();
+			glLoadMatrixf(&transform[0][0]);
+
 			auto key = view->getModelKeyName();
 			auto model = assetLoader->getModel3dBy(key);
 			auto meshes = model->getMeshes();
@@ -81,26 +86,14 @@ namespace sqr{
 				auto vertices = j->getVertices();				
 				auto color = view->getColor(); 
 				
-				std::vector<float> vxs;
-				std::vector<float> colors;
+				std::vector<vec3> vxs;
+				std::vector<vec4> colors;
 				for(auto k : vertices) {
 					auto pos = k->getPosition();
-					vxs.push_back(pos[0]);
-					vxs.push_back(pos[1]);
-					vxs.push_back(pos[2]);
-					colors.push_back(color[0]);
-					colors.push_back(color[1]);
-					colors.push_back(color[2]);
-					colors.push_back(color[3]);
+					vxs.push_back(pos);
+					colors.push_back(color);
 				}
 				
-				glMatrixMode(GL_PROJECTION);
-				glLoadMatrixf(&projection[0][0]);			
-				
-				glMatrixMode(GL_MODELVIEW);
-				auto transform = view->getTransform();
-				glLoadMatrixf(&transform[0][0]);
-
 				glVertexPointer(3, GL_FLOAT, 3 * sizeof(GLfloat), &vxs[0]);
 				glColorPointer(4, GL_FLOAT, 4 * sizeof(GLfloat), &colors[0]);
 				
@@ -141,19 +134,20 @@ namespace sqr{
 			auto id = i.first;
 			auto view = i.second;
 			auto key = view->getModelKeyName();
+			auto transform = view->getTransform();
 			auto model = assetLoader->getModel3dBy(key);
 			auto meshes = model->getMeshes();
 			for(auto j : meshes) {
 				auto vertices = j->getVertices();
 				for(uint8_t k = 0; k < vertices.size(); k += 3){
 					vec3 a = vertices[k]->getPosition();					
-					a = vec3{view->getTransform() * vec4{a, 1.0f}};
+					a = vec3{transform * vec4{a, 1.0f}};
 
 					vec3 b = vertices[k + 1]->getPosition();
-					b = vec3{view->getTransform() * vec4{b, 1.0f}};
+					b = vec3{transform * vec4{b, 1.0f}};
 
 					vec3 c = vertices[k + 2]->getPosition();
-					c = vec3{view->getTransform() * vec4{c, 1.0f}};
+					c = vec3{transform * vec4{c, 1.0f}};
 
 					if(isInsideTrianle(mouse, a, b, c)) {
 						mouseOver = id;

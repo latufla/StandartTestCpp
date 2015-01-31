@@ -1,7 +1,7 @@
 #pragma once
 #include "../../SharedHeaders.h"
-#include <array>
 #include <glm.hpp>
+#include <string>
 
 namespace sqr {
 	class IView {
@@ -14,6 +14,6 @@ namespace sqr {
 		virtual void translate(float x, float y, float z) = 0;
 		virtual void scale(float x, float y, float z) = 0;
 
-		virtual std::array<float, 4>& getColor() = 0;
+		virtual glm::vec4& getColor() = 0;
 	};
 }

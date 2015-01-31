@@ -14,7 +14,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	auto assetLoader = std::make_shared<sqr::AssetLoader>();
 	sqr::RenderEngine renderer(assetLoader);
 
-	std::array<float, 4> color = {0.0f, 0.0f, 1.0f, 1.0f};
+	auto color = glm::vec4{0.0f, 0.0f, 1.0f, 1.0f};
 	auto view = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, color);
 	auto view2 = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, color);
 	view2->translate(0.6f, 0.6f, 0.0f);

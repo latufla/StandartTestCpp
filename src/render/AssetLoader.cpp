@@ -7,6 +7,8 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+using glm::vec3;
+
 // default
 namespace sqr{
 	AssetLoader::AssetLoader() {
@@ -24,36 +26,24 @@ namespace sqr{
 
 
 	std::shared_ptr<IModel3d> AssetLoader::createCircleModel() {
-		const uint16_t segments = 80;
+		const uint16_t segments = 50;
 		const float delta = 2.0f * (float)M_PI / (float)segments;
-		std::vector<float> shape;
 		float radius = 0.5f; // just to build model
-		for(uint32_t i = 0; i < segments; ++i) {
-			shape.push_back(radius * cos(i * delta));
-			shape.push_back(radius * sin(i * delta));
-			shape.push_back(0.0f);
-
-			shape.push_back(radius * cos((i + 1) * delta));
-			shape.push_back(radius * sin((i + 1) * delta));
-			shape.push_back(0.0f);
-
-			shape.push_back(0.0f);
-			shape.push_back(0.0f);
-			shape.push_back(0.0f);
-		}
-
 		std::vector<std::shared_ptr<IVertex3d>> vertices;
-		for(uint32_t i = 0; i < shape.size(); i += 3) {
-// 			std::array <float, 3> v = {
-// 				shape[i],
-// 				shape[i + 1],
-// 				shape[i + 2]
-// 			};
-			glm::vec3 v{shape[i], shape[i + 1], shape[i + 2]};
+		for(uint32_t i = 0; i < segments; ++i) {
+			glm::vec3 v(vec3{radius * cos(i * delta), radius * sin(i * delta), 0.0f});
 			auto vertex = std::make_shared<Vertex3d>(v);
 			vertices.push_back(vertex);
+
+			v = vec3{radius * cos((i + 1) * delta), radius * sin((i + 1) * delta), 0.0f};
+			vertex = std::make_shared<Vertex3d>(v);
+			vertices.push_back(vertex);
+
+			v = vec3{0.0f, 0.0f, 0.0f};
+			vertex = std::make_shared<Vertex3d>(v);
+			vertices.push_back(vertex);
 		}
-		
+
 		std::vector<uint16_t> indices;
 		std::shared_ptr<Mesh3d> mesh = std::make_shared<Mesh3d>(vertices, indices);
 

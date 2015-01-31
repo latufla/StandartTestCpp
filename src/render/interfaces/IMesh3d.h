@@ -2,7 +2,6 @@
 #include "../../SharedHeaders.h"
 #include <vector>
 #include <memory>
-#include <array>
 #include <glm.hpp>
 
 namespace sqr {

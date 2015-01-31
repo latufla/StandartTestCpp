@@ -24,7 +24,7 @@ namespace sqr {
 
 		virtual std::shared_ptr<IView> getObjectBy(uint32_t id) override;
 
-		virtual bool doStep(double step) override;
+		virtual bool doStep(long long step) override;
 
 		virtual bool getMouseLeftDown() override;
 		virtual int32_t getMouseOver() override;

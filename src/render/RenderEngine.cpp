@@ -44,7 +44,7 @@ namespace sqr{
 		return idToObject.at(id);
 	}
 
-	bool RenderEngine::doStep(double step) {
+	bool RenderEngine::doStep(long long step) {
 		if(!window->isOpen())
 			return false;
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "IMesh3d.h"
+#include "interfaces/IMesh3d.h"
 
 namespace sqr{
 	class Vertex3d : public IVertex3d {

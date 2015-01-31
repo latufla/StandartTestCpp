@@ -1,5 +1,5 @@
 #pragma once
-#include "../SharedHeaders.h"
+#include "../../SharedHeaders.h"
 #include <array>
 
 namespace sqr {

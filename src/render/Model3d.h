@@ -1,5 +1,5 @@
 #pragma once
-#include "IModel3d.h"
+#include "interfaces/IModel3d.h"
 
 namespace sqr {
 	class Model3d : public IModel3d{

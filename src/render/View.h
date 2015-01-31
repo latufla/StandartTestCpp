@@ -1,5 +1,5 @@
 #pragma once
-#include "IView.h"
+#include "interfaces/IView.h"
 
 namespace sqr {
 	class View : public IView{

@@ -1,7 +1,7 @@
 #pragma once
-#include "IRenderer.h"
+#include "interfaces/IRenderer.h"
 #include <memory>
-#include "ILoader.h"
+#include "interfaces/ILoader.h"
 #include <unordered_map>
 
 // default

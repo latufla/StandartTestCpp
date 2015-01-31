@@ -1,5 +1,5 @@
 #pragma once
-#include "IMesh3d.h"
+#include "interfaces/IMesh3d.h"
 
 // default
 namespace sqr {

@@ -1,4 +1,5 @@
 #include "Renderer.h"
+
 #include <SFML/OpenGL.hpp>
 
 using std::shared_ptr;
@@ -11,6 +12,7 @@ namespace sqr{
 	}
 	
 	Renderer::~Renderer() {
+
 	}
 
 	void Renderer::addObject(uint32_t id, shared_ptr<IView> object) {
@@ -39,6 +41,8 @@ namespace sqr{
 		
 		window->clear(sf::Color::Black);
 		
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		glDisable(GL_LIGHTING); 
 		glViewport(0, 0, window->getSize().x, window->getSize().y);
 		
@@ -70,17 +74,22 @@ namespace sqr{
 					colors.push_back(color[3]);
 				}
 				
-				glVertexPointer(3, GL_FLOAT, 3 * sizeof(GLfloat), &vxs[0]);
-				glColorPointer(4, GL_FLOAT, 4 * sizeof(GLfloat), &colors[0]);
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				float ratio = (float)window->getSize().x / (float)window->getSize().y;
+				glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 				
+				glMatrixMode(GL_MODELVIEW);
 				auto transform = view->getTransform();
 				glLoadMatrixf(&transform[0]);
 
+				glVertexPointer(3, GL_FLOAT, 3 * sizeof(GLfloat), &vxs[0]);
+				glColorPointer(4, GL_FLOAT, 4 * sizeof(GLfloat), &colors[0]);
+				
 				glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 			}
 		}
 		window->display();
-
 		return true;
 	}
 

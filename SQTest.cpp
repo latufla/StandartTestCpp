@@ -14,8 +14,10 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	auto assetLoader = std::make_shared<sqr::AssetLoader>();
 	sqr::Renderer renderer(assetLoader);
 
-	std::array<float, 16> transform;
-	auto view = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, transform);
+	std::array<float, 4> color = {0.0f, 0.0f, 1.0f, 1.0f};
+	auto view = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, color);
+//	view->translate(0.5f, 0.5f, 0.0f);
+//	view->scale(0.5f, 0.5f, 0.5f);
 	renderer.addObject(1, view);
 
 	const uint32_t step = 1000 / 60;

@@ -9,5 +9,10 @@ namespace sqr {
 
 		virtual void setTransform(std::array<float, 16>) = 0;
 		virtual std::array<float, 16>& getTransform() = 0;
+		
+		virtual void translate(float x, float y, float z) = 0;
+		virtual void scale(float x, float y, float z) = 0;
+
+		virtual std::array<float, 4>& getColor() = 0;
 	};
 }

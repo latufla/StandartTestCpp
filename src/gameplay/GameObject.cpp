@@ -9,10 +9,13 @@ namespace sg {
 
 	GameObject::GameObject(std::weak_ptr<sqr::IRenderEngine> renderer,
 		std::weak_ptr<sqw::IWorld> world, 
-		uint32_t id, std::weak_ptr<sg::IGameObjectInfo> info, const glm::vec2& position) : id(id) {
+		uint32_t id, std::weak_ptr<sg::IGameObjectInfo> info, const glm::vec2& position) 
+		: id(id){
 
 		auto sInfo = info.lock();
 		auto objectInfo = (sg::GameObjectInfo*)sInfo.get();
+
+		points = objectInfo->points;
 
 		auto view = std::make_shared<sqr::View>(objectInfo->modelName, objectInfo->color);
 		auto sRenderer = renderer.lock();
@@ -67,6 +70,10 @@ namespace sg {
 
 	std::weak_ptr<sqw::IObject> GameObject::getWorldObject() {
 		return worldObject;
+	}
+
+	int32_t GameObject::getPoints() {
+		return points;
 	}
 
 }

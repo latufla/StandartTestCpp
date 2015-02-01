@@ -12,6 +12,9 @@ class IGameObject {
 
 		virtual std::weak_ptr<sqw::IWorld> getWorld() = 0;
 		virtual std::weak_ptr<sqw::IObject> getWorldObject() = 0;
+
+
+		virtual int32_t getPoints() = 0;
 	};
 }
 

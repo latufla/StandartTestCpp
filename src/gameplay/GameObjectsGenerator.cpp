@@ -9,7 +9,7 @@ namespace sg {
 	GameObjectsGenerator::~GameObjectsGenerator() {
 	}
 
-	bool GameObjectsGenerator::doStep(IGameField* field, long long step) {
+	bool GameObjectsGenerator::doStep(IGameField* field, long long step) { 
 		elapsedTime += step;
 
 		if(lastCreationTime + interval > elapsedTime)// its quite unreliable but the easiest way
@@ -17,7 +17,8 @@ namespace sg {
 		
 		lastCreationTime = elapsedTime;
 
-		auto objectInfo = std::make_shared<sg::GameObjectInfo>();
+		// we really should use Command pattern here
+		auto objectInfo = std::make_shared<sg::GameObjectInfo>(); 
 		objectInfo->modelName = sqr::Model3d::DEFAULT_MODEL;
 		objectInfo->radius = 1.0f;
 		objectInfo->points = 10;

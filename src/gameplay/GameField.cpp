@@ -16,6 +16,10 @@ namespace sg {
 		idToObject.erase(id);
 	}
 
+	std::shared_ptr<IGameObject> GameField::getObjectBy(uint32_t id) {
+		return idToObject.at(id);
+	}
+	
 	void GameField::addProcessor(std::shared_ptr<IGameProcessor> processor) {
 		processors.push_back(processor);
 	}
@@ -41,5 +45,4 @@ namespace sg {
 	std::unordered_map<uint32_t, std::shared_ptr<IGameObject>>& GameField::getObjects() {
 		return idToObject;
 	}
-
 }

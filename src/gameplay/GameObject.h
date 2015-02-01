@@ -5,7 +5,6 @@
 
 // default
 // controller for view, world interaction
-// and components support
 namespace sg{
 	class GameObject : public IGameObject{
 	public:
@@ -18,14 +17,17 @@ namespace sg{
 
 		virtual bool doStep(long long step);
 
-		virtual std::weak_ptr<sqr::IRenderEngine> getRenderer();
-		virtual std::weak_ptr<sqr::IView> getView();
+		virtual std::weak_ptr<sqr::IRenderEngine> getRenderer() override;
+		virtual std::weak_ptr<sqr::IView> getView() override;
 
-		virtual std::weak_ptr<sqw::IWorld> getWorld();
-		virtual std::weak_ptr<sqw::IObject> getWorldObject();
+		virtual std::weak_ptr<sqw::IWorld> getWorld() override;
+		virtual std::weak_ptr<sqw::IObject> getWorldObject() override;
+
+		virtual int32_t getPoints() override;
 	private:
 		uint32_t id;
-		
+		int32_t points;
+
 		std::weak_ptr<sqr::IRenderEngine> renderer;
 		std::weak_ptr<sqr::IView> view;
 

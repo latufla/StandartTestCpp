@@ -1,6 +1,8 @@
 #pragma once
 #include "interface\IGameField.h"
 
+// default
+// controller for game objects
 namespace sg {
 	class GameField : public IGameField{
 	public:
@@ -11,6 +13,8 @@ namespace sg {
 
 		virtual void addObject(uint32_t id, std::shared_ptr<IGameObject> object) override;
 		virtual void removeObject(uint32_t id) override;
+
+		virtual std::shared_ptr<IGameObject> getObjectBy(uint32_t id) override;
 
 		virtual void addProcessor(std::shared_ptr<IGameProcessor>) override;
 

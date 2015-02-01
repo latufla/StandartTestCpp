@@ -17,21 +17,26 @@ namespace sg {
 		auto view = std::make_shared<sqr::View>(objectInfo->modelName, objectInfo->color);
 		auto sRenderer = renderer.lock();
 		if(sRenderer) {
-			sRenderer->addObject(1, view);
+			sRenderer->addObject(id, view);
 			this->renderer = renderer;
-			this->view = view;
+			this->view = sRenderer->getObjectBy(id);
 		}
 
 		auto worldObject = std::make_shared<sqw::Object>(position, objectInfo->speed);
 		auto sWorld = world.lock();
 		if(sWorld) {
-			sWorld->addObject(1, worldObject);
+			sWorld->addObject(id, worldObject);
 			this->world = world;
-			this->worldObject = worldObject;
+			this->worldObject = sWorld->getObjectBy(id);
 		}
 	}
 		
 	GameObject::~GameObject() {
+		if(auto sRenderer = renderer.lock())
+			sRenderer->removeObject(id);
+
+		if(auto sWorld = world.lock())
+			sWorld->removeObject(id);
 	}
 
 	bool GameObject::doStep(long long step) {

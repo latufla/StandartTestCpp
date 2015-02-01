@@ -11,9 +11,11 @@ namespace sg {
 		std::string modelName;
 
 		float radius;
+		uint32_t points;
 		glm::vec4 color;
 	
 		glm::vec2 speed;
+
 	};
 }
 

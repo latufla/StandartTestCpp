@@ -4,7 +4,7 @@
 namespace sqw{
 	class Object : public IObject{
 	public:
-		Object() = default;
+		Object(const glm::vec2& position, const glm::vec2& speed);
 		virtual ~Object();
 
 		virtual glm::vec2& getPosition() override;

@@ -2,15 +2,19 @@
 #include "..\render\View.h"
 #include "..\render\Model3d.h"
 #include "..\world\Object.h"
+#include "GameObjectInfo.h"
 
 
 namespace sg {
 
 	GameObject::GameObject(std::weak_ptr<sqr::IRenderEngine> renderer,
 		std::weak_ptr<sqw::IWorld> world, 
-		uint32_t id, uint32_t radius, const glm::vec2& position, const glm::vec4& color) : id(id) {
+		uint32_t id, std::weak_ptr<sg::IGameObjectInfo> info, const glm::vec2& position) : id(id) {
 
-		auto view = std::make_shared<sqr::View>(sqr::Model3d::DEFAULT_MODEL, color);
+		auto sInfo = info.lock();
+		auto objectInfo = (sg::GameObjectInfo*)sInfo.get();
+
+		auto view = std::make_shared<sqr::View>(objectInfo->modelName, objectInfo->color);
 		auto sRenderer = renderer.lock();
 		if(sRenderer) {
 			sRenderer->addObject(1, view);
@@ -18,9 +22,7 @@ namespace sg {
 			this->view = view;
 		}
 
-		auto worldObject = std::make_shared<sqw::Object>();
-		auto& speed = worldObject->getSpeed();
-		speed.y = -0.000001f;
+		auto worldObject = std::make_shared<sqw::Object>(position, objectInfo->speed);
 		auto sWorld = world.lock();
 		if(sWorld) {
 			sWorld->addObject(1, worldObject);

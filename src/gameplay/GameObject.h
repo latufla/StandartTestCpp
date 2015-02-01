@@ -1,6 +1,7 @@
 #pragma once
 #include "interface\IGameObject.h"
 #include <memory>
+#include "interface\IGameObjectInfo.h"
 
 // default
 // controller for view, world interaction
@@ -11,7 +12,7 @@ namespace sg{
 		GameObject() = delete;
 		GameObject(std::weak_ptr<sqr::IRenderEngine> renderer,
 			std::weak_ptr<sqw::IWorld> world,
-			uint32_t id, uint32_t radius, const glm::vec2& position, const glm::vec4& color);
+			uint32_t id, std::weak_ptr<sg::IGameObjectInfo> info, const glm::vec2& position);
 
 		virtual ~GameObject();
 
@@ -24,7 +25,7 @@ namespace sg{
 		virtual std::weak_ptr<sqw::IObject> getWorldObject();
 	private:
 		uint32_t id;
-
+		
 		std::weak_ptr<sqr::IRenderEngine> renderer;
 		std::weak_ptr<sqr::IView> view;
 

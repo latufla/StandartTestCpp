@@ -25,7 +25,7 @@ namespace sqw {
 		for(auto i : idToObject) {
 			auto object = i.second;
 			auto& pos = object->getPosition();
-			auto speed = object->getSpeed();
+			auto& speed = object->getSpeed();
 			pos.y += step * speed.y;
 		}
 		return true;

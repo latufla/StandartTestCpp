@@ -4,7 +4,7 @@
 namespace sg {
 	class GameObjectsGenerator : public IGameProcessor{
 	public:
-		GameObjectsGenerator() = default;
+		GameObjectsGenerator();
 		virtual ~GameObjectsGenerator();
 
 		virtual bool doStep(IGameField* field, long long step) override;

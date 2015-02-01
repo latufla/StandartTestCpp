@@ -26,7 +26,7 @@ namespace sqr{
 	}
 
 	void View::translate(float x, float y, float z) {
-		transform = glm::translate(transform, glm::vec3{x, y, z});
+		transform = glm::translate(glm::mat4{}, glm::vec3{x, y, z});
 	}
 
 	void View::scale(float x, float y, float z) {

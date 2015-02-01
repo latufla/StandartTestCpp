@@ -8,7 +8,7 @@ namespace sg {
 		virtual ~GameObjectsShooter();
 
 		virtual bool doStep(IGameField* field, long long step) override;
-	private:
+	protected:
 		uint32_t score = 0;
 	};
 }

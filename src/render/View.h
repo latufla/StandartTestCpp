@@ -15,10 +15,7 @@ namespace sqr {
 		virtual glm::mat4 getTransform() override;
 
 		virtual glm::vec4& getColor() override;
-
-		virtual void translate(float x, float y, float z) override;
-		virtual void scale(float x, float y, float z) override;
-	private:
+	protected:
 		std::string modelKeyName;
 		glm::mat4 transform;
 

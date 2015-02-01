@@ -31,14 +31,15 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	auto shooter = std::make_shared<sg::GameObjectsShooter>();
 	gameField->addProcessor(shooter);
 
-	const uint32_t step = 1000 / 60;
+	const uint32_t step = 1000 / 60; // don`t float it
 	long long begin = getElapsedTimeMSec();
 	bool running = true;
 	while(running) {
 		long long elapsedTime = getElapsedTimeMSec() - begin;
-		if(elapsedTime >= step) {
-			running = renderer->doStep(step);
+		if(elapsedTime >= step) {			
 			world->doStep(step);
+			running = renderer->doStep(step);
+
 			gameField->doStep(step);
 
 			begin = getElapsedTimeMSec() - (elapsedTime - step);

@@ -4,12 +4,11 @@
 #include "..\world\Object.h"
 #include "GameObjectInfo.h"
 
-
 namespace sg {
 
 	GameObject::GameObject(std::weak_ptr<sqr::IRenderEngine> renderer,
 		std::weak_ptr<sqw::IWorld> world, 
-		uint32_t id, std::weak_ptr<sg::IGameObjectInfo> info, const glm::vec2& position) 
+		uint32_t id, std::weak_ptr<sg::IGameObjectInfo> info, const glm::mat4& transform)
 		: id(id){
 
 		auto sInfo = info.lock();
@@ -25,7 +24,7 @@ namespace sg {
 			this->view = sRenderer->getObjectBy(id);
 		}
 
-		auto worldObject = std::make_shared<sqw::Object>(position, objectInfo->speed);
+		auto worldObject = std::make_shared<sqw::Object>(transform, objectInfo->speed);
 		auto sWorld = world.lock();
 		if(sWorld) {
 			sWorld->addObject(id, worldObject);
@@ -49,8 +48,8 @@ namespace sg {
 
 		auto sView = view.lock();
 		if(sView){
-			auto& pos = sWorldObject->getPosition();
-			sView->translate(pos.x, pos.y, 0.0f);
+			auto& transform = sWorldObject->getTransform();
+			sView->setTransform(transform);
 		}
 			
 		return true;

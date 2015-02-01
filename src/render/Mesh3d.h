@@ -13,7 +13,7 @@ namespace sqr {
 		virtual std::vector<std::shared_ptr<IVertex3d>>& getVertices() override;
 		virtual std::vector<uint16_t>& getIndices() override;
 
-	private:
+	protected:
 		std::vector<std::shared_ptr<IVertex3d>> vertices; // this is crap, but see no way ac. to design
 		std::vector<uint16_t> indices;
 	};

@@ -31,7 +31,7 @@ namespace sqr{
 	std::shared_ptr<IModel3d> AssetLoader::createDefaultModel() {
 		const uint16_t segments = 50;
 		const float delta = 2.0f * (float)M_PI / (float)segments;
-		float radius = 0.5f; // just to build model
+		float radius = 1.0f; // just to build model
 		std::vector<std::shared_ptr<IVertex3d>> vertices;
 		for(uint32_t i = 0; i < segments; ++i) {
 			glm::vec3 v(vec3{radius * cos(i * delta), radius * sin(i * delta), 0.0f});

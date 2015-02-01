@@ -11,7 +11,7 @@ namespace sg{
 		GameObject() = delete;
 		GameObject(std::weak_ptr<sqr::IRenderEngine> renderer,
 			std::weak_ptr<sqw::IWorld> world,
-			uint32_t id, std::weak_ptr<sg::IGameObjectInfo> info, const glm::vec2& position);
+			uint32_t id, std::weak_ptr<sg::IGameObjectInfo> info, const glm::mat4& transform);
 
 		virtual ~GameObject();
 
@@ -24,7 +24,7 @@ namespace sg{
 		virtual std::weak_ptr<sqw::IObject> getWorldObject() override;
 
 		virtual int32_t getPoints() override;
-	private:
+	protected:
 		uint32_t id;
 		int32_t points;
 

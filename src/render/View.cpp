@@ -24,12 +24,4 @@ namespace sqr{
 	glm::vec4& View::getColor() {
 		return color;
 	}
-
-	void View::translate(float x, float y, float z) {
-		transform = glm::translate(glm::mat4{}, glm::vec3{x, y, z});
-	}
-
-	void View::scale(float x, float y, float z) {
-		transform = glm::scale(transform, glm::vec3{x, y, z});
-	}
 }

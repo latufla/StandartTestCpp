@@ -1,5 +1,5 @@
 #include "World.h"
-#include <iostream>
+#include <gtc/matrix_transform.hpp>
 
 using std::shared_ptr;
 
@@ -24,9 +24,10 @@ namespace sqw {
 	bool World::doStep(long long step) {
 		for(auto i : idToObject) {
 			auto object = i.second;
-			auto& pos = object->getPosition();
+			auto& transform = object->getTransform();
 			auto& speed = object->getSpeed();
-			pos.y += step * speed.y;
+			glm::vec3 delta{step * speed.x, step * speed.y, 0.0f};
+			object->setTransform(glm::translate(transform, delta));
 		}
 		return true;
 	}

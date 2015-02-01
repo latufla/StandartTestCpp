@@ -26,8 +26,11 @@ namespace sqw {
 			auto object = i.second;
 			auto& transform = object->getTransform();
 			auto& speed = object->getSpeed();
+						
 			glm::vec3 delta{step * speed.x, step * speed.y, 0.0f};
-			object->setTransform(glm::translate(transform, delta));
+			glm::mat4 translation = glm::translate(glm::mat4{}, delta);
+
+			object->setTransform(translation * transform);
 		}
 		return true;
 	}

@@ -33,7 +33,7 @@ namespace sg {
 		const float defaultRadius = 0.1f;
 		const int32_t defaultPoints = 10;
 		const float defaultColorSeed = 0.5f;
-		const float defaultSpeed = -0.001f;
+		const float defaultSpeed = -0.0001f;
 		
 		auto objectInfo = std::make_shared<sg::GameObjectInfo>(); 
 		objectInfo->modelName = sqr::Model3d::DEFAULT_MODEL;
@@ -48,7 +48,7 @@ namespace sg {
 		blueSeed = defaultColorSeed + (1.0f - defaultColorSeed) * blueSeed;
 		
 		objectInfo->color = glm::vec4{0.0f, greenSeed, blueSeed, 1.0f};
-		objectInfo->speed = glm::vec2{0.0f, defaultSpeed / objectInfo->radius}; // don`t see significant diff
+		objectInfo->speed = glm::vec2{0.0f, defaultSpeed / objectInfo->radius};
 		
 		double x = (double)std::rand() / RAND_MAX;
 		x = 2.0f * x - 1.0f;

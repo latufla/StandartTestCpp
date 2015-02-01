@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <glm.hpp>
+#include "../gui/interfaces/IMainHud.h"
 
 // default
 // should impl one more connector to sfml and gl
@@ -29,6 +30,7 @@ namespace sqr {
 		virtual bool getMouseLeftDown() override;
 		virtual int32_t getMouseOver() override;
 
+		virtual std::shared_ptr<sqr::IMainHud> getMainHud() override;
 	protected:
 		int32_t mouseOver;
 
@@ -39,5 +41,6 @@ namespace sqr {
 		std::unordered_map<uint32_t, std::shared_ptr<IView>> idToObject;
 
 		std::shared_ptr<sf::RenderWindow> window;
+		std::shared_ptr<sqr::IMainHud> mainHud;
 	};
 }

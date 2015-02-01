@@ -4,6 +4,7 @@
 #include <glm.hpp>
 #include <iostream>
 #include <gtc/matrix_transform.hpp>
+#include "../gui/MainHud.h"
 
 using std::shared_ptr;
 using std::numeric_limits;
@@ -19,11 +20,13 @@ using glm::normalize;
 using glm::ortho;
 
 namespace sqr{
-
 	RenderEngine::RenderEngine(shared_ptr<ILoader> assetLoader) 
 		:assetLoader(assetLoader) {
 
-		window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1024, 768), "SFML");
+		window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1024, 768), "");
+		window->setVerticalSyncEnabled(true);
+
+		mainHud = std::make_shared<sqr::MainHud>(assetLoader);
 	}
 	
 	RenderEngine::~RenderEngine() {
@@ -100,6 +103,12 @@ namespace sqr{
 				glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 			}
 		}
+
+		window->pushGLStates();
+		auto scoreField = mainHud->getScoreTextField();
+		window->draw(*(scoreField.get()));
+		window->popGLStates();
+
 		window->display();
 				
 		calcMouseOverObject(projection);
@@ -114,6 +123,11 @@ namespace sqr{
 	int32_t RenderEngine::getMouseOver() {
 		return mouseOver;
 	}
+	
+	std::shared_ptr<sqr::IMainHud> RenderEngine::getMainHud() {
+		return mainHud;
+	}
+
 
 	void RenderEngine::calcMouseOverObject(glm::mat4& projection) {
 		mouseOver = -1;

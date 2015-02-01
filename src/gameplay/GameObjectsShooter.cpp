@@ -1,6 +1,8 @@
 #include "GameObjectsShooter.h"
 #include "interface/IGameField.h"
 #include <iostream>
+#include "../gui/MainHudData.h"
+#include <memory>
 
 namespace sg{
 	GameObjectsShooter::~GameObjectsShooter() {
@@ -21,8 +23,13 @@ namespace sg{
 			int32_t id = sRenderer->getMouseOver();
 			if(id != -1) {
 				auto object = field->getObjectBy(id);				
-				points += object->getPoints();
+				score += object->getPoints();
 				field->removeObject(id);
+				
+				auto mainHud = sRenderer->getMainHud();
+				auto hudData = std::make_shared<sqr::MainHudData>();
+				hudData->score = score;
+				mainHud->update(hudData);
 			}
 		}
 

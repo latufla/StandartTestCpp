@@ -2,6 +2,7 @@
 #include "../../SharedHeaders.h"
 #include <memory>
 #include "IView.h"
+#include "../../gui/interfaces/IMainHud.h"
 
 namespace sqr {
 	class IRenderEngine {
@@ -15,5 +16,7 @@ namespace sqr {
 
 		virtual bool getMouseLeftDown() = 0;
 		virtual int32_t getMouseOver() = 0;
+	
+		virtual std::shared_ptr<sqr::IMainHud> getMainHud() = 0;
 	};
 }

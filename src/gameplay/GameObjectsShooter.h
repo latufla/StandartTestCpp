@@ -9,7 +9,7 @@ namespace sg {
 
 		virtual bool doStep(IGameField* field, long long step) override;
 	private:
-		uint32_t points = 0;
+		uint32_t score = 0;
 	};
 }
 

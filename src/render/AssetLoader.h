@@ -11,11 +11,16 @@ namespace sqr {
 		virtual ~AssetLoader();
 
 		virtual std::shared_ptr<IModel3d> getModel3dBy(std::string keyName) override;
-	
+		virtual std::shared_ptr<sf::Font> getFont(std::string familyAsKey) override;
+
 	protected:
-		std::shared_ptr<IModel3d> createCircleModel(); // hard code, but can b external load
+		// hard code, but can b external load
+		std::shared_ptr<IModel3d> createDefaultModel(); 
+		std::shared_ptr<sf::Font> loadDefaultFont();
+		//--
 
 		std::unordered_map<std::string, std::shared_ptr<IModel3d>> nameToModel;
+		std::unordered_map<std::string, std::shared_ptr<sf::Font>> nameToFont;
 	};
 }
 

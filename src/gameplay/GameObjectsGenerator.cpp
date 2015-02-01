@@ -31,7 +31,7 @@ namespace sg {
 
 		// we really should use Command pattern here
 		const float defaultRadius = 0.1f;
-		const int32_t defaultPoints = 10;
+		const int32_t defaultPoints = 4;
 		const float defaultColorSeed = 0.5f;
 		const float defaultSpeed = -0.0001f;
 		
@@ -39,7 +39,7 @@ namespace sg {
 		objectInfo->modelName = sqr::Model3d::DEFAULT_MODEL;
 		double radiusSeed = (double)std::rand() / RAND_MAX;
 		objectInfo->radius = defaultRadius + (0.4f - defaultRadius) * radiusSeed;
-		objectInfo->points = (int32_t)(objectInfo->radius * defaultPoints);
+		objectInfo->points = (int32_t)(defaultPoints / objectInfo->radius);
 
 		double greenSeed = (double)std::rand() / RAND_MAX;
 		greenSeed = defaultColorSeed + (1.0f - defaultColorSeed) * greenSeed;

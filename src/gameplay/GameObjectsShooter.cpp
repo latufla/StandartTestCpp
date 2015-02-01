@@ -9,6 +9,8 @@ namespace sg{
 	}
 
 	bool GameObjectsShooter::doStep(IGameField* field, long long step) {
+		elapsedTime += step;
+
 		auto renderer = field->getRenderer();
 		auto sRenderer = renderer.lock();
 		if(!sRenderer)
@@ -20,6 +22,11 @@ namespace sg{
 			return false;
 
 		if(sRenderer->getMouseLeftDown()) { // we really should use Command pattern here
+			if(lastClickTime + interval > elapsedTime)// its quite unreliable but the easiest way
+				return false;
+
+			lastClickTime = elapsedTime;
+
 			int32_t id = sRenderer->getMouseOver();
 			if(id != -1) {
 				auto object = field->getObjectBy(id);				

@@ -2,14 +2,13 @@
 #include "interface/IGameField.h"
 #include "../gui/MainHudData.h"
 #include <memory>
+#include <iostream>
 
 namespace sg{
 	GameObjectsShooter::~GameObjectsShooter() {
 	}
 
 	bool GameObjectsShooter::doStep(IGameField* field, long long step) {
-		elapsedTime += step;
-
 		auto renderer = field->getRenderer();
 		auto sRenderer = renderer.lock();
 		if(!sRenderer)
@@ -19,24 +18,30 @@ namespace sg{
 		auto sWorld = world.lock();
 		if(!sWorld)
 			return false;
+		
 
-		if(sRenderer->getMouseLeftDown()) { // we really should use Command pattern here
-			if(lastClickTime + interval > elapsedTime)// its quite unreliable but the easiest way
-				return true;
-
-			lastClickTime = elapsedTime;
-
-			int32_t id = sRenderer->getMouseOver();
-			if(id != -1) {
-				auto object = field->getObjectBy(id);				
-				score += object->getPoints();
-				field->removeObject(id);
+		int32_t mouseOverObject = sRenderer->getMouseOver();
+		bool isMouseDown = sRenderer->getMouseLeftDown();
+		if(!mouseDown && isMouseDown) { // key down
+			mouseDown = true;
+			mouseDownObject = mouseOverObject;
+		}
+		
+		if(mouseDown && !isMouseDown) { // key up
+			if(mouseOverObject != -1 && mouseDownObject == mouseOverObject) { // and over the same object
 				
-				auto mainHud = sRenderer->getMainHud();
-				auto hudData = std::make_shared<sqr::MainHudData>();
-				hudData->score = score;
-				mainHud->update(hudData);
+				// we really should use Command pattern here
+					auto object = field->getObjectBy(mouseOverObject);
+					score += object->getPoints();
+					field->removeObject(mouseOverObject);
+
+					auto mainHud = sRenderer->getMainHud();
+					auto hudData = std::make_shared<sqr::MainHudData>();
+					hudData->score = score;
+					mainHud->update(hudData);
 			}
+			mouseDown = false;
+			mouseDownObject = -1;
 		}
 
 		return true;

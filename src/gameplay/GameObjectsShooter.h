@@ -11,9 +11,8 @@ namespace sg {
 	protected:
 		uint32_t score = 0;
 
-		long long elapsedTime = 0;
-		long long lastClickTime = 0;
-		uint32_t interval = 100;
+		bool mouseDown = false;
+		int32_t mouseDownObject = -1;
 	};
 }
 

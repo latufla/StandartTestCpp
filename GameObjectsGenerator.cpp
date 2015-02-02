@@ -36,22 +36,23 @@ bool GameObjectsGenerator::doStep(sg::IGameEngine* field, long long step) {
 
 	auto objectInfo = std::make_shared<sg::GameObjectInfo>();
 	objectInfo->modelName = sqr::Model3d::DEFAULT_MODEL;
-	double radiusSeed = (double)std::rand() / RAND_MAX;
-	objectInfo->radius = defaultRadius + (0.4f - defaultRadius) * radiusSeed;
+
+	double rndRadius = (double)std::rand() / RAND_MAX;
+	objectInfo->radius = defaultRadius + (0.4f - defaultRadius) * rndRadius;
 	objectInfo->points = (int32_t)(defaultPoints / objectInfo->radius);
 
-	double greenSeed = (double)std::rand() / RAND_MAX;
-	greenSeed = defaultColorSeed + (1.0f - defaultColorSeed) * greenSeed;
+	double rndGreen = (double)std::rand() / RAND_MAX;
+	rndGreen = defaultColorSeed + (1.0f - defaultColorSeed) * rndGreen;
 
-	double blueSeed = (double)std::rand() / RAND_MAX;
-	blueSeed = defaultColorSeed + (1.0f - defaultColorSeed) * blueSeed;
+	double rndBlue = (double)std::rand() / RAND_MAX;
+	rndBlue = defaultColorSeed + (1.0f - defaultColorSeed) * rndBlue;
 
-	objectInfo->color = glm::vec4{0.0f, greenSeed, blueSeed, 1.0f};
+	objectInfo->color = glm::vec4{0.0f, rndGreen, rndBlue, 1.0f};
 	objectInfo->speed = glm::vec2{0.0f, defaultSpeed / objectInfo->radius};
 
-	double x = (double)std::rand() / RAND_MAX;
-	x = 2.0f * x - 1.0f;
-	glm::vec3 position{x, 1.0f - objectInfo->radius, 0.0f};
+	double rndX = (double)std::rand() / RAND_MAX;
+	rndX = 2.0f * rndX - 1.0f;
+	glm::vec3 position{rndX, 1.0f - objectInfo->radius, 0.0f};
 
 	glm::vec3 scaling{objectInfo->radius, objectInfo->radius, 0.0f};
 

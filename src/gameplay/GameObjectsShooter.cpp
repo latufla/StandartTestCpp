@@ -1,6 +1,5 @@
 #include "GameObjectsShooter.h"
 #include "interface/IGameField.h"
-#include <iostream>
 #include "../gui/MainHudData.h"
 #include <memory>
 

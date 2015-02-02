@@ -1,6 +1,5 @@
 #include "GameObjectsRemover.h"
 #include "interface\IGameField.h"
-#include <iostream>
 
 
 namespace sg {

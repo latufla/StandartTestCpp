@@ -2,7 +2,6 @@
 
 #include <SFML/OpenGL.hpp>
 #include <glm.hpp>
-#include <iostream>
 #include <gtc/matrix_transform.hpp>
 #include "../gui/MainHud.h"
 
@@ -144,17 +143,17 @@ namespace sqr{
 		vec4 mouseWorld = toWorld * vec4(mouseNdc.x, mouseNdc.y, 0.0f, 1.0f);
 		vec3 mouse{mouseWorld};
 
-		for(auto& i : idToObject) {
-			auto id = i.first;
-			auto view = i.second;
+		for(auto it = idToObject.rbegin(); it != idToObject.rend(); ++it) {
+			auto id = it->first;
+			auto view = it->second;
 			auto key = view->getModelKeyName();
 			auto transform = view->getTransform();
 			auto model = assetLoader->getModel3dBy(key);
 			auto meshes = model->getMeshes();
 			for(auto j : meshes) {
 				auto vertices = j->getVertices();
-				for(uint8_t k = 0; k < vertices.size(); k += 3){
-					vec3 a = vertices[k]->getPosition();					
+				for(uint8_t k = 0; k < vertices.size(); k += 3) {
+					vec3 a = vertices[k]->getPosition();
 					a = vec3{transform * vec4{a, 1.0f}};
 
 					vec3 b = vertices[k + 1]->getPosition();

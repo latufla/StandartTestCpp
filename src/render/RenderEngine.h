@@ -2,7 +2,7 @@
 #include "interfaces/IRenderEngine.h"
 #include <memory>
 #include "interfaces/ILoader.h"
-#include <unordered_map>
+#include <map>
 
 #include <SFML/Graphics.hpp>
 #include <glm.hpp>
@@ -38,7 +38,7 @@ namespace sqr {
 		bool isInsideTrianle(glm::vec3& p, glm::vec3& a, glm::vec3& b, glm::vec3& c);
 
 		std::shared_ptr<ILoader> assetLoader;
-		std::unordered_map<uint32_t, std::shared_ptr<IView>> idToObject;
+		std::map<uint32_t, std::shared_ptr<IView>> idToObject;
 
 		std::shared_ptr<sf::RenderWindow> window;
 		std::shared_ptr<sqr::IMainHud> mainHud;

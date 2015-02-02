@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9885E9EF-8991-4DA1-92ED-77B78D53124D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SQTest</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(WindowsSDK_IncludePath);$(VC_IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>vendor\glm\include;vendor\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>vendor\sfml\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;glew.lib;jpeg.lib;freetype.lib;OpenGL32.lib;WinMM.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>vendor\glm\include;vendor\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>vendor\sfml\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;glew.lib;jpeg.lib;freetype.lib;OpenGL32.lib;WinMM.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameObjectsRemover.h" />
+    <ClInclude Include="MainHudData.h" />
+    <ClInclude Include="MainHud.h" />
+    <ClInclude Include="GameObjectsShooter.h" />
+    <ClInclude Include="GameObjectsGenerator.h" />
+    <ClInclude Include="src\gameplay\GameEngine.h" />
+    <ClInclude Include="src\gameplay\GameObjectInfo.h" />
+    <ClInclude Include="src\gameplay\interface\IGameProcessor.h" />
+    <ClInclude Include="src\gameplay\interface\IGameEngine.h" />
+    <ClInclude Include="src\gameplay\interface\IGameObjectInfo.h" />
+    <ClInclude Include="src\gameplay\GameObject.h" />
+    <ClInclude Include="src\gameplay\interface\IGameObject.h" />
+    <ClInclude Include="src\gui\interfaces\IMainHudData.h" />
+    <ClInclude Include="src\gui\interfaces\IMainHud.h" />
+    <ClInclude Include="src\world\Object.h" />
+    <ClInclude Include="src\world\interfaces\IWorld.h" />
+    <ClInclude Include="src\world\interfaces\IObject.h" />
+    <ClInclude Include="src\render\Model3d.h" />
+    <ClInclude Include="src\render\Mesh3d.h" />
+    <ClInclude Include="src\render\AssetLoader.h" />
+    <ClInclude Include="src\render\interfaces\ILoader.h" />
+    <ClInclude Include="src\render\Renderer.h" />
+    <ClInclude Include="src\render\interfaces\IMesh3d.h" />
+    <ClInclude Include="src\render\interfaces\IModel3d.h" />
+    <ClInclude Include="src\render\interfaces\IRenderEngine.h" />
+    <ClInclude Include="src\render\interfaces\IView.h" />
+    <ClInclude Include="src\SharedHeaders.h" />
+    <ClInclude Include="src\render\Vertex3d.h" />
+    <ClInclude Include="src\render\View.h" />
+    <ClInclude Include="src\world\World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameObjectsRemover.cpp" />
+    <ClCompile Include="MainHudData.cpp" />
+    <ClCompile Include="MainHud.cpp" />
+    <ClCompile Include="GameObjectsShooter.cpp" />
+    <ClCompile Include="GameObjectsGenerator.cpp" />
+    <ClCompile Include="src\gameplay\GameEngine.cpp" />
+    <ClCompile Include="src\gameplay\GameObjectInfo.cpp" />
+    <ClCompile Include="src\gameplay\GameObject.cpp" />
+    <ClCompile Include="src\world\Object.cpp" />
+    <ClCompile Include="src\render\Model3d.cpp" />
+    <ClCompile Include="src\render\Mesh3d.cpp" />
+    <ClCompile Include="src\render\AssetLoader.cpp" />
+    <ClCompile Include="src\render\Renderer.cpp" />
+    <ClCompile Include="SQTest.cpp" />
+    <ClCompile Include="src\render\Vertex3d.cpp" />
+    <ClCompile Include="src\render\View.cpp" />
+    <ClCompile Include="src\world\World.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

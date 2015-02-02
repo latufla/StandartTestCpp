@@ -10,13 +10,11 @@
 
 // default
 // should impl one more connector to sfml and gl
-// and add components to renderer
-// but it`s not a spaceship
 namespace sqr {
 	class Renderer : public IRenderEngine {
 	public:
 		Renderer() = delete;
-		Renderer(std::shared_ptr<ILoader> assetLoader);
+		Renderer(std::shared_ptr<ILoader> assetLoader, std::shared_ptr<sqr::IMainHud>);
 
 		virtual ~Renderer();
 	

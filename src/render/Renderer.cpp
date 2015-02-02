@@ -3,10 +3,8 @@
 #include <SFML/OpenGL.hpp>
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
-#include "../gui/MainHud.h"
 
 using std::shared_ptr;
-using std::numeric_limits;
 
 using glm::vec2;
 using glm::vec3;
@@ -15,17 +13,14 @@ using glm::mat4;
 using glm::cross;
 using glm::dot;
 using glm::inverse;
-using glm::normalize;
 using glm::ortho;
 
 namespace sqr{
-	Renderer::Renderer(shared_ptr<ILoader> assetLoader) 
-		:assetLoader(assetLoader) {
+	Renderer::Renderer(shared_ptr<ILoader> assetLoader, std::shared_ptr<sqr::IMainHud> mainHud)
+		:assetLoader(assetLoader), mainHud(mainHud) {
 
 		window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1024, 768), "");
 		window->setVerticalSyncEnabled(true);
-
-		mainHud = std::make_shared<sqr::MainHud>(assetLoader);
 	}
 	
 	Renderer::~Renderer() {

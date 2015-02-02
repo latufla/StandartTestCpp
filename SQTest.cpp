@@ -9,27 +9,29 @@
 #include "src/gameplay/GameObject.h"
 #include "src/gameplay/GameObjectInfo.h"
 #include "src/gameplay/GameEngine.h"
-#include "src/gameplay/GameObjectsGenerator.h"
-#include "src/gameplay/GameObjectsShooter.h"
-#include "src/gameplay/GameObjectsRemover.h"
+#include "GameObjectsGenerator.h"
+#include "GameObjectsShooter.h"
+#include "GameObjectsRemover.h"
+#include "MainHud.h"
 
 long long getElapsedTimeMSec();
 
 int _tmain(int argc, _TCHAR* argv[]) {
 	auto assetLoader = std::make_shared<sqr::AssetLoader>();
-	auto renderer = std::make_shared<sqr::Renderer>(assetLoader);
+	auto mainHud = std::make_shared <MainHud>(assetLoader);
+	auto renderer = std::make_shared<sqr::Renderer>(assetLoader, mainHud);
 
 	auto world = std::make_shared<sqw::World>();
 	
 	auto gameField = std::make_shared<sg::GameEngine>(renderer, world);
 	
-	auto generator = std::make_shared<sg::GameObjectsGenerator>();
+	auto generator = std::make_shared<GameObjectsGenerator>();
 	gameField->addProcessor(generator);
 	
-	auto shooter = std::make_shared<sg::GameObjectsShooter>();
+	auto shooter = std::make_shared<GameObjectsShooter>();
 	gameField->addProcessor(shooter);
 
-	auto eol = std::make_shared<sg::GameObjectsRemover>();
+	auto eol = std::make_shared<GameObjectsRemover>();
 	gameField->addProcessor(eol);
 	
 	const uint32_t step = 1000 / 60;

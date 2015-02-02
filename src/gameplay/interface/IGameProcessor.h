@@ -6,7 +6,7 @@ namespace sg {
 	class IGameEngine;
 	class IGameProcessor {
 	public:
-		virtual bool doStep(IGameEngine* field, long long step) = 0;
+		virtual bool doStep(IGameEngine* field, long long step) = 0; // sorry, rapid
 	};
 }
 

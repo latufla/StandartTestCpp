@@ -2,16 +2,13 @@
 //
 
 #include "src/SharedHeaders.h"
-#include "src/render/RenderEngine.h"
+#include "src/render/Renderer.h"
 #include "src/render/AssetLoader.h"
-#include "src/render/View.h"
-#include "src/render/Model3d.h"
 #include <chrono>
 #include "src/world/World.h"
-#include "src/world/Object.h"
 #include "src/gameplay/GameObject.h"
 #include "src/gameplay/GameObjectInfo.h"
-#include "src/gameplay/GameField.h"
+#include "src/gameplay/GameEngine.h"
 #include "src/gameplay/GameObjectsGenerator.h"
 #include "src/gameplay/GameObjectsShooter.h"
 #include "src/gameplay/GameObjectsRemover.h"
@@ -20,11 +17,11 @@ long long getElapsedTimeMSec();
 
 int _tmain(int argc, _TCHAR* argv[]) {
 	auto assetLoader = std::make_shared<sqr::AssetLoader>();
-	auto renderer = std::make_shared<sqr::RenderEngine>(assetLoader);
+	auto renderer = std::make_shared<sqr::Renderer>(assetLoader);
 
 	auto world = std::make_shared<sqw::World>();
 	
-	auto gameField = std::make_shared<sg::GameField>(renderer, world);
+	auto gameField = std::make_shared<sg::GameEngine>(renderer, world);
 	
 	auto generator = std::make_shared<sg::GameObjectsGenerator>();
 	gameField->addProcessor(generator);
@@ -40,12 +37,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	bool running = true;
 	while(running) {
 		long long elapsedTime = getElapsedTimeMSec() - begin;
-		if(elapsedTime >= step) {			
-			world->doStep(step);
-			running = renderer->doStep(step);
-
-			gameField->doStep(step);
-
+		if(elapsedTime >= step) {						
+			running = gameField->doStep(step);
 			begin = getElapsedTimeMSec() - (elapsedTime - step);
 		}
 	}

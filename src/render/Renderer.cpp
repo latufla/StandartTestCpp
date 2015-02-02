@@ -1,4 +1,4 @@
-#include "RenderEngine.h"
+#include "Renderer.h"
 
 #include <SFML/OpenGL.hpp>
 #include <glm.hpp>
@@ -19,7 +19,7 @@ using glm::normalize;
 using glm::ortho;
 
 namespace sqr{
-	RenderEngine::RenderEngine(shared_ptr<ILoader> assetLoader) 
+	Renderer::Renderer(shared_ptr<ILoader> assetLoader) 
 		:assetLoader(assetLoader) {
 
 		window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1024, 768), "");
@@ -28,25 +28,25 @@ namespace sqr{
 		mainHud = std::make_shared<sqr::MainHud>(assetLoader);
 	}
 	
-	RenderEngine::~RenderEngine() {
+	Renderer::~Renderer() {
 
 	}
 
-	void RenderEngine::addObject(uint32_t id, shared_ptr<IView> object) {
+	void Renderer::addObject(uint32_t id, shared_ptr<IView> object) {
 		idToObject.emplace(id, object);
 		// we should load geometry to gpu here
 	}
 
-	void RenderEngine::removeObject(uint32_t id) {
+	void Renderer::removeObject(uint32_t id) {
 		idToObject.erase(id);
 		// we should unload geometry from gpu here
 	}
 
-	shared_ptr<IView> RenderEngine::getObjectBy(uint32_t id) {
+	shared_ptr<IView> Renderer::getObjectBy(uint32_t id) {
 		return idToObject.at(id);
 	}
 
-	bool RenderEngine::doStep(long long step) {
+	bool Renderer::doStep(long long step) {
 		if(!window->isOpen())
 			return false;
 
@@ -115,20 +115,20 @@ namespace sqr{
 		return true;
 	}
 
-	bool RenderEngine::getMouseLeftDown() {
+	bool Renderer::getMouseLeftDown() {
 		return sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	}
 
-	int32_t RenderEngine::getMouseOver() {
+	int32_t Renderer::getMouseOver() {
 		return mouseOver;
 	}
 	
-	std::shared_ptr<sqr::IMainHud> RenderEngine::getMainHud() {
+	std::shared_ptr<sqr::IMainHud> Renderer::getMainHud() {
 		return mainHud;
 	}
 
 
-	void RenderEngine::calcMouseOverObject(glm::mat4& projection) {
+	void Renderer::calcMouseOverObject(glm::mat4& projection) {
 		mouseOver = -1;
 
 		auto mousePos = sf::Mouse::getPosition(*window.get());
@@ -171,7 +171,7 @@ namespace sqr{
 		}
 	}
 
-	bool RenderEngine::isInsideTrianle(vec3& p, vec3& a, vec3& b, vec3& c) {
+	bool Renderer::isInsideTrianle(vec3& p, vec3& a, vec3& b, vec3& c) {
 		vec3 v0 = c - a;
 		vec3 v1 = b - a;
 		vec3 v2 = p - a;

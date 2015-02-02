@@ -7,7 +7,7 @@ namespace sg {
 		GameObjectsRemover() = default;
 		virtual ~GameObjectsRemover();
 
-		virtual bool doStep(IGameField* field, long long step) override;
+		virtual bool doStep(IGameEngine* field, long long step) override;
 	};
 	
 }

@@ -7,7 +7,7 @@ namespace sg {
 		GameObjectsGenerator();
 		virtual ~GameObjectsGenerator();
 
-		virtual bool doStep(IGameField* field, long long step) override;
+		virtual bool doStep(IGameEngine* field, long long step) override;
 	protected:		
 		long long elapsedTime = 0;
 		

@@ -1,15 +1,15 @@
 #pragma once
-#include "interface\IGameField.h"
+#include "interface\IGameEngine.h"
 
 // default
 // controller for game objects
 namespace sg {
-	class GameField : public IGameField{
+	class GameEngine : public IGameEngine{
 	public:
-		GameField() = delete;
-		GameField(std::weak_ptr<sqr::IRenderEngine> renderer, std::weak_ptr<sqw::IWorld> world);
+		GameEngine() = delete;
+		GameEngine(std::shared_ptr<sqr::IRenderEngine> renderer, std::shared_ptr<sqw::IWorld> world);
 
-		virtual ~GameField();
+		virtual ~GameEngine();
 
 		virtual void addObject(uint32_t id, std::shared_ptr<IGameObject> object) override;
 		virtual void removeObject(uint32_t id) override;
@@ -20,8 +20,8 @@ namespace sg {
 
 		virtual bool doStep(long long step) override;
 
-		virtual std::weak_ptr<sqr::IRenderEngine> getRenderer() override;
-		virtual std::weak_ptr<sqw::IWorld> getWorld() override;
+		virtual std::shared_ptr<sqr::IRenderEngine> getRenderer() override;
+		virtual std::shared_ptr<sqw::IWorld> getWorld() override;
 
 		virtual std::unordered_map<uint32_t, std::shared_ptr<IGameObject>>& getObjects() override;
 
@@ -29,8 +29,8 @@ namespace sg {
 		std::unordered_map<uint32_t, std::shared_ptr<IGameObject>> idToObject;
 		std::vector<std::shared_ptr<IGameProcessor>> processors;
 
-		std::weak_ptr<sqr::IRenderEngine> renderer;
-		std::weak_ptr<sqw::IWorld> world;
+		std::shared_ptr<sqr::IRenderEngine> renderer;
+		std::shared_ptr<sqw::IWorld> world;
 	};
 }
 

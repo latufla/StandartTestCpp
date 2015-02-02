@@ -2,7 +2,7 @@
 #include "GameObjectInfo.h"
 #include "..\render\Model3d.h"
 #include "GameObject.h"
-#include "GameField.h"
+#include "GameEngine.h"
 #include <chrono>
 #include <gtc/matrix_transform.hpp>
 
@@ -20,7 +20,7 @@ namespace sg {
 	}
 
 
-	bool GameObjectsGenerator::doStep(IGameField* field, long long step) { 
+	bool GameObjectsGenerator::doStep(IGameEngine* field, long long step) { 
 		elapsedTime += step;
 
 		if(lastCreationTime + interval > elapsedTime)// its quite unreliable but the easiest way

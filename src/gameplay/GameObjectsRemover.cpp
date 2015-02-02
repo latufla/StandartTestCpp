@@ -1,12 +1,12 @@
 #include "GameObjectsRemover.h"
-#include "interface\IGameField.h"
+#include "interface\IGameEngine.h"
 
 
 namespace sg {
 	GameObjectsRemover::~GameObjectsRemover() {
 	}
 
-	bool GameObjectsRemover::doStep(IGameField* field, long long step) {
+	bool GameObjectsRemover::doStep(IGameEngine* field, long long step) {
 
 		// we really should use Command pattern here
 		std::vector<uint32_t> objectToRemove;

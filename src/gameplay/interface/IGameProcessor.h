@@ -3,10 +3,10 @@
 #include <memory>
 
 namespace sg {
-	class IGameField;
+	class IGameEngine;
 	class IGameProcessor {
 	public:
-		virtual bool doStep(IGameField* field, long long step) = 0;
+		virtual bool doStep(IGameEngine* field, long long step) = 0;
 	};
 }
 

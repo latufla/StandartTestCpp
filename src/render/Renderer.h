@@ -13,12 +13,12 @@
 // and add components to renderer
 // but it`s not a spaceship
 namespace sqr {
-	class RenderEngine : public IRenderEngine {
+	class Renderer : public IRenderEngine {
 	public:
-		RenderEngine() = delete;
-		RenderEngine(std::shared_ptr<ILoader> assetLoader);
+		Renderer() = delete;
+		Renderer(std::shared_ptr<ILoader> assetLoader);
 
-		virtual ~RenderEngine();
+		virtual ~Renderer();
 	
 		virtual void addObject(uint32_t id, std::shared_ptr<IView> object) override;
 		virtual void removeObject(uint32_t id) override;

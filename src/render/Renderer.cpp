@@ -83,6 +83,8 @@ namespace sqr{
 				auto vertices = j->getVertices();				
 				auto color = view->getColor(); 
 				
+				// dirt
+				// vertices are static info, so we should load em earlier
 				std::vector<vec3> vxs;
 				std::vector<vec4> colors;
 				for(auto k : vertices) {
@@ -90,7 +92,8 @@ namespace sqr{
 					vxs.push_back(pos);
 					colors.push_back(color);
 				}
-				
+				//
+
 				glVertexPointer(3, GL_FLOAT, 3 * sizeof(GLfloat), &vxs[0]);
 				glColorPointer(4, GL_FLOAT, 4 * sizeof(GLfloat), &colors[0]);
 				

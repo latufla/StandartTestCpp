@@ -24,7 +24,7 @@ namespace sg {
 		elapsedTime += step;
 
 		if(lastCreationTime + interval > elapsedTime)// its quite unreliable but the easiest way
-			return false;
+			return true;
 		
 		lastCreationTime = elapsedTime;
 				

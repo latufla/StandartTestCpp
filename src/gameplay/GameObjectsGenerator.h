@@ -14,8 +14,7 @@ namespace sg {
 		long long lastCreationTime = 0;
 		
 		uint32_t nextObjectId = 0;
-		uint32_t interval = 500;
-
+		uint32_t interval = 1000;
 	};
 }
 

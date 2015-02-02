@@ -14,6 +14,7 @@
 #include "src/gameplay/GameField.h"
 #include "src/gameplay/GameObjectsGenerator.h"
 #include "src/gameplay/GameObjectsShooter.h"
+#include "src/gameplay/GameObjectsRemover.h"
 
 long long getElapsedTimeMSec();
 
@@ -31,7 +32,10 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	auto shooter = std::make_shared<sg::GameObjectsShooter>();
 	gameField->addProcessor(shooter);
 
-	const uint32_t step = 1000 / 60; // don`t float it
+	auto eol = std::make_shared<sg::GameObjectsRemover>();
+	gameField->addProcessor(eol);
+	
+	const uint32_t step = 1000 / 60;
 	long long begin = getElapsedTimeMSec();
 	bool running = true;
 	while(running) {

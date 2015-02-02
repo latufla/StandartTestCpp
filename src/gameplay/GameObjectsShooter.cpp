@@ -23,7 +23,7 @@ namespace sg{
 
 		if(sRenderer->getMouseLeftDown()) { // we really should use Command pattern here
 			if(lastClickTime + interval > elapsedTime)// its quite unreliable but the easiest way
-				return false;
+				return true;
 
 			lastClickTime = elapsedTime;
 

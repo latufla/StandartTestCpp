@@ -186,4 +186,11 @@ namespace sqr{
 
 		return (u >= 0.0f) && (v >= 0.0f) && (u + v < 1.0f);
 	}
+
+	glm::vec2 Renderer::getWindowSize() {
+		auto wSize = window->getSize();
+		glm::vec2 res{wSize.x, wSize.y};
+		return res;
+	}
+
 }

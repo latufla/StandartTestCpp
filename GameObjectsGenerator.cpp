@@ -50,10 +50,21 @@ bool GameObjectsGenerator::doStep(sg::IGameEngine* field, long long step) {
 	objectInfo->color = glm::vec4{0.0, rndGreen, rndBlue, 1.0};
 	objectInfo->speed = glm::vec2{0.0, defaultSpeed / objectInfo->radius};
 
-	double rndX = (double)std::rand() / RAND_MAX;
-	rndX = 2.0 * rndX - 1.0;
-	glm::vec3 position{rndX, 1.0 - objectInfo->radius, 0.0};
+	auto renderer = field->getRenderer();
+	auto wSize = renderer->getWindowSize();
 
+	double ratio = (double)wSize.x / (double)wSize.y;
+	ratio -= objectInfo->radius;
+	double rndX = 0.0;
+	if(ratio > 0.0) {
+		double a = -ratio;
+		double b = ratio;
+		double rnd = ((double)rand()) / (double)RAND_MAX;
+		rndX = a + rnd * (b - a);
+	}
+
+	glm::vec3 position{rndX, 1.0 - objectInfo->radius, 0.0};
+	
 	glm::vec3 scaling{objectInfo->radius, objectInfo->radius, 0.0};
 
 	glm::mat4 transform = glm::translate(glm::mat4{}, position) * glm::scale(glm::mat4{}, scaling);

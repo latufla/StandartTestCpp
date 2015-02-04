@@ -27,6 +27,8 @@ namespace sqr {
 
 		virtual bool getMouseLeftDown() override;
 		virtual int32_t getMouseOver() override;
+		
+		virtual glm::vec2 getWindowSize() override;
 
 		virtual std::shared_ptr<sqr::IMainHud> getMainHud() override;
 	protected:

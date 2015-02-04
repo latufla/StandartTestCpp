@@ -14,7 +14,11 @@
 #include "GameObjectsRemover.h"
 #include "MainHud.h"
 
+// may have issues here
+#include <thread>
+
 long long getElapsedTimeMSec();
+void sleep(long long interval);
 
 int _tmain(int argc, _TCHAR* argv[]) {
 	auto assetLoader = std::make_shared<sqr::AssetLoader>();
@@ -35,13 +39,16 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	gameField->addProcessor(eol);
 	
 	const uint32_t step = 1000 / 60;
-	long long begin = getElapsedTimeMSec();
+	long long lastStepTime = getElapsedTimeMSec();
 	bool running = true;
 	while(running) {
-		long long elapsedTime = getElapsedTimeMSec() - begin;
+		long long elapsedTime = getElapsedTimeMSec() - lastStepTime;
 		if(elapsedTime >= step) {						
 			running = gameField->doStep(step);
-			begin = getElapsedTimeMSec() - (elapsedTime - step);
+			lastStepTime = getElapsedTimeMSec() - (elapsedTime - step);
+		}
+		else {
+			sleep(step - elapsedTime);
 		}
 	}
 	return 0;
@@ -52,6 +59,12 @@ long long getElapsedTimeMSec() {
 	auto now = high_resolution_clock::now();
 	auto mSec = duration_cast<milliseconds>(now.time_since_epoch());
 	return mSec.count();
+}
+
+// this_thread may not work on mobile
+// so fork it
+void sleep(long long interval) {
+	std::this_thread::sleep_for(std::chrono::milliseconds(interval));
 }
 
 

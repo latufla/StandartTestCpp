@@ -131,23 +131,21 @@ namespace sqr{
 			auto key = view->getModelKeyName();
 			auto transform = view->getTransform();
 			auto model = assetLoader->getModel3dBy(key);
-			auto meshes = model->getMeshes();
-			for(auto j : meshes) {
-				auto vertices = j->getVertices();
-				for(uint8_t k = 0; k < vertices.size(); k += 3) {
-					vec3 a = vertices[k]->getPosition();
-					a = vec3{transform * vec4{a, 1.0f}};
+			auto mesh = model->getHitMesh();
+			auto vertices = mesh->getVertices();
+			for(uint8_t k = 0; k < vertices.size(); k += 3) {
+				vec3 a = vertices[k]->getPosition();
+				a = vec3{transform * vec4{a, 1.0f}};
 
-					vec3 b = vertices[k + 1]->getPosition();
-					b = vec3{transform * vec4{b, 1.0f}};
+				vec3 b = vertices[k + 1]->getPosition();
+				b = vec3{transform * vec4{b, 1.0f}};
 
-					vec3 c = vertices[k + 2]->getPosition();
-					c = vec3{transform * vec4{c, 1.0f}};
+				vec3 c = vertices[k + 2]->getPosition();
+				c = vec3{transform * vec4{c, 1.0f}};
 
-					if(isInsideTrianle(mouse, a, b, c)) {
-						mouseOver = id;
-						return;
-					}
+				if(isInsideTrianle(mouse, a, b, c)) {
+					mouseOver = id;
+					return;
 				}
 			}
 		}

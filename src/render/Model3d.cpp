@@ -20,4 +20,9 @@ namespace sqr{
 	std::vector<std::shared_ptr<IMesh3d>>& Model3d::getMeshes() {
 		return meshes;
 	}
+
+	std::shared_ptr<IMesh3d>& Model3d::getHitMesh() {
+		return meshes.at(0); // no special hit mesh 
+	}
+
 }

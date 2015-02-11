@@ -35,12 +35,10 @@ namespace sqr{
 
 	void Renderer::addObject(uint32_t id, shared_ptr<IView> object) {
 		idToObject.emplace(id, object);
-		// we should load geometry to gpu here
 	}
 
 	void Renderer::removeObject(uint32_t id) {
 		idToObject.erase(id);
-		// we should unload geometry from gpu here
 	}
 
 	shared_ptr<IView> Renderer::getObjectBy(uint32_t id) {
@@ -80,27 +78,16 @@ namespace sqr{
 			auto model = assetLoader->getModel3dBy(key);
 			auto meshes = model->getMeshes();
 			for(auto j : meshes) {
-				auto vertices = j->getVertices();				
-				auto color = view->getColor(); 
-				
-				// dirt
-				// vertices are static info, so we should load em earlier
-				std::vector<vec3> vxs;
-				std::vector<vec4> colors;
-				for(auto k : vertices) {
-					auto pos = k->getPosition();
-					vxs.push_back(pos);
-				}
-				//
+				auto& vertices = j->getRawVertices();
+				auto color = view->getColor();
 				glColor4f(color.r, color.g, color.b, color.a);
-				glVertexPointer(3, GL_FLOAT, 3 * sizeof(GLfloat), &vxs[0]);
-				
-				glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+				glVertexPointer(3, GL_FLOAT, 3 * sizeof(GLfloat), &vertices[0]);		
+				glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3);
 			}
 		}
 
 		window->pushGLStates();
-		auto scoreField = mainHud->getScoreTextField();
+		auto scoreField = mainHud->getScoreTextField(); // dirt
 		window->draw(*(scoreField.get()));
 		window->popGLStates();	
 		window->display();

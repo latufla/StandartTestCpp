@@ -48,7 +48,7 @@ namespace sqr{
 		}
 
 		std::vector<uint16_t> indices;
-		std::shared_ptr<Mesh3d> mesh = std::make_shared<Mesh3d>(vertices, indices);
+		std::shared_ptr<Mesh3d> mesh = std::make_shared<Mesh3d>(Model3d::DEFAULT_MODEL, vertices, indices);
 
 		std::vector<std::shared_ptr<IMesh3d>> meshes;
 		meshes.push_back(mesh);

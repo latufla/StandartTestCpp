@@ -1,22 +1,22 @@
 #pragma once
-#include "interface\IGameEngine.h"
+#include "interfaces\IEngine.h"
 
 // default
 // controller for game objects
 namespace sg {
-	class GameEngine : public IGameEngine{
+	class Engine : public IEngine{
 	public:
-		GameEngine() = delete;
-		GameEngine(std::shared_ptr<sqr::IRenderEngine> renderer, std::shared_ptr<sqw::IWorld> world);
+		Engine() = delete;
+		Engine(std::shared_ptr<sqr::IRenderEngine> renderer, std::shared_ptr<sqw::IWorld> world);
 
-		virtual ~GameEngine();
+		virtual ~Engine();
 
 		virtual void addObject(uint32_t id, std::shared_ptr<IGameObject> object) override;
 		virtual void removeObject(uint32_t id) override;
 
 		virtual std::shared_ptr<IGameObject> getObjectBy(uint32_t id) override;
 
-		virtual void addProcessor(std::shared_ptr<IGameProcessor>) override;
+		virtual void addProcessor(std::shared_ptr<IProcessor>) override;
 
 		virtual bool doStep(long long step) override;
 
@@ -27,7 +27,7 @@ namespace sg {
 
 	protected:
 		std::unordered_map<uint32_t, std::shared_ptr<IGameObject>> idToObject;
-		std::vector<std::shared_ptr<IGameProcessor>> processors;
+		std::vector<std::shared_ptr<IProcessor>> processors;
 
 		std::shared_ptr<sqr::IRenderEngine> renderer;
 		std::shared_ptr<sqw::IWorld> world;

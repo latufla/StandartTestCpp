@@ -1,10 +1,11 @@
 #include "GameObjectsGenerator.h"
 #include <chrono>
 #include <gtc/matrix_transform.hpp>
-#include "src/gameplay/interface/IGameEngine.h"
+#include "src/gameplay/interfaces/IEngine.h"
 #include "src/gameplay/GameObjectInfo.h"
 #include "src/render/Model3d.h"
 #include "src/gameplay/GameObject.h"
+#include "src/gameplay/commands/CreateCommand.h"
 
 using namespace std::chrono;
 
@@ -19,7 +20,7 @@ GameObjectsGenerator::~GameObjectsGenerator() {
 }
 
 
-bool GameObjectsGenerator::doStep(sg::IGameEngine* field, long long step) {
+bool GameObjectsGenerator::doStep(sg::IEngine* engine, long long step) {
 	elapsedTime += step;
 
 	if(lastCreationTime + interval > elapsedTime)// its quite unreliable but the easiest way
@@ -28,7 +29,6 @@ bool GameObjectsGenerator::doStep(sg::IGameEngine* field, long long step) {
 	lastCreationTime = elapsedTime;
 
 
-	// we really should use Command pattern here
 	const double defaultRadius = 0.1;
 	const int32_t defaultPoints = 4;
 	const double defaultColorSeed = 0.5;
@@ -50,7 +50,7 @@ bool GameObjectsGenerator::doStep(sg::IGameEngine* field, long long step) {
 	objectInfo->color = glm::vec4{0.0, rndGreen, rndBlue, 1.0};
 	objectInfo->speed = glm::vec2{0.0, defaultSpeed / objectInfo->radius};
 
-	auto renderer = field->getRenderer();
+	auto renderer = engine->getRenderer();
 	auto wSize = renderer->getWindowSize();
 
 	double ratio = (double)wSize.x / (double)wSize.y;
@@ -63,17 +63,11 @@ bool GameObjectsGenerator::doStep(sg::IGameEngine* field, long long step) {
 		rndX = a + rnd * (b - a);
 	}
 
-	glm::vec3 position{rndX, 1.0 - objectInfo->radius, 0.0};
-	
+	glm::vec3 position{rndX, 1.0 - objectInfo->radius, 0.0};	
 	glm::vec3 scaling{objectInfo->radius, objectInfo->radius, 0.0};
-
 	glm::mat4 transform = glm::translate(glm::mat4{}, position) * glm::scale(glm::mat4{}, scaling);
-	auto gameObject = std::make_shared<sg::GameObject>(field->getRenderer(), field->getWorld(), nextObjectId, objectInfo, transform);
-	field->addObject(nextObjectId, gameObject);
-
-
-	nextObjectId++;
-
-	return true;
+	
+	sg::CreateCommand create(engine, objectInfo, transform);
+	return create.tryToExecute();
 }
 

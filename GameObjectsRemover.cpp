@@ -1,15 +1,14 @@
 #include "GameObjectsRemover.h"
-#include "src\gameplay\interface\IGameEngine.h"
+#include "src\gameplay\interfaces\IEngine.h"
+#include "src\gameplay\commands\DestroyCommand.h"
 
 
 GameObjectsRemover::~GameObjectsRemover() {
 }
 
-bool GameObjectsRemover::doStep(sg::IGameEngine* field, long long step) {
-
-	// we really should use Command pattern here
+bool GameObjectsRemover::doStep(sg::IEngine* engine, long long step) {
 	std::vector<uint32_t> objectToRemove;
-	for(auto& i : field->getObjects()) {
+	for(auto& i : engine->getObjects()) {
 		auto id = i.first;
 		auto object = i.second;
 		auto worldObject = object->getWorldObject();
@@ -28,7 +27,8 @@ bool GameObjectsRemover::doStep(sg::IGameEngine* field, long long step) {
 	}
 
 	for(auto& i : objectToRemove) {
-		field->removeObject(i);
+		sg::DestroyCommand destroy(engine, i);
+		destroy.tryToExecute();
 	}
 
 	return true;

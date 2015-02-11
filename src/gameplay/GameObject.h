@@ -1,7 +1,7 @@
 #pragma once
-#include "interface\IGameObject.h"
+#include "interfaces\IGameObject.h"
 #include <memory>
-#include "interface\IGameObjectInfo.h"
+#include "interfaces\IGameObjectInfo.h"
 
 // default
 // controller for view, world interaction

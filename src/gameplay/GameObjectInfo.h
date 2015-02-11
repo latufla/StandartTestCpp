@@ -1,5 +1,5 @@
 #pragma once
-#include "interface\IGameObjectInfo.h"
+#include "interfaces\IGameObjectInfo.h"
 #include <glm.hpp>
 
 namespace sg {

@@ -87,18 +87,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\gameplay\commands\DestroyCommand.h" />
+    <ClInclude Include="src\gameplay\commands\CreateCommand.h" />
+    <ClInclude Include="src\gameplay\commands\Command.h" />
     <ClInclude Include="GameObjectsRemover.h" />
+    <ClInclude Include="src\gameplay\commands\ICommand.h" />
     <ClInclude Include="MainHudData.h" />
     <ClInclude Include="MainHud.h" />
     <ClInclude Include="GameObjectsShooter.h" />
     <ClInclude Include="GameObjectsGenerator.h" />
-    <ClInclude Include="src\gameplay\GameEngine.h" />
+    <ClInclude Include="src\gameplay\Engine.h" />
     <ClInclude Include="src\gameplay\GameObjectInfo.h" />
-    <ClInclude Include="src\gameplay\interface\IGameProcessor.h" />
-    <ClInclude Include="src\gameplay\interface\IGameEngine.h" />
-    <ClInclude Include="src\gameplay\interface\IGameObjectInfo.h" />
+    <ClInclude Include="src\gameplay\interfaces\IProcessor.h" />
+    <ClInclude Include="src\gameplay\interfaces\IEngine.h" />
+    <ClInclude Include="src\gameplay\interfaces\IGameObjectInfo.h" />
     <ClInclude Include="src\gameplay\GameObject.h" />
-    <ClInclude Include="src\gameplay\interface\IGameObject.h" />
+    <ClInclude Include="src\gameplay\interfaces\IGameObject.h" />
     <ClInclude Include="src\gui\interfaces\IMainHudData.h" />
     <ClInclude Include="src\gui\interfaces\IMainHud.h" />
     <ClInclude Include="src\world\Object.h" />
@@ -119,12 +123,15 @@
     <ClInclude Include="src\world\World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\gameplay\commands\DestroyCommand.cpp" />
+    <ClCompile Include="src\gameplay\commands\CreateCommand.cpp" />
+    <ClCompile Include="src\gameplay\commands\Command.cpp" />
     <ClCompile Include="GameObjectsRemover.cpp" />
     <ClCompile Include="MainHudData.cpp" />
     <ClCompile Include="MainHud.cpp" />
     <ClCompile Include="GameObjectsShooter.cpp" />
     <ClCompile Include="GameObjectsGenerator.cpp" />
-    <ClCompile Include="src\gameplay\GameEngine.cpp" />
+    <ClCompile Include="src\gameplay\Engine.cpp" />
     <ClCompile Include="src\gameplay\GameObjectInfo.cpp" />
     <ClCompile Include="src\gameplay\GameObject.cpp" />
     <ClCompile Include="src\world\Object.cpp" />

@@ -1,10 +1,10 @@
 #pragma once
-#include "src\gameplay\interface\IGameProcessor.h"
+#include "src\gameplay\interfaces\IProcessor.h"
 
-class GameObjectsRemover : public sg::IGameProcessor {
+class GameObjectsRemover : public sg::IProcessor {
 public:
 	GameObjectsRemover() = default;
 	virtual ~GameObjectsRemover();
 
-	virtual bool doStep(sg::IGameEngine* field, long long step) override;
+	virtual bool doStep(sg::IEngine* engine, long long step) override;
 };

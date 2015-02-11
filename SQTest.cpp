@@ -8,7 +8,7 @@
 #include "src/world/World.h"
 #include "src/gameplay/GameObject.h"
 #include "src/gameplay/GameObjectInfo.h"
-#include "src/gameplay/GameEngine.h"
+#include "src/gameplay/Engine.h"
 #include "GameObjectsGenerator.h"
 #include "GameObjectsShooter.h"
 #include "GameObjectsRemover.h"
@@ -27,7 +27,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 
 	auto world = std::make_shared<sqw::World>();
 	
-	auto gameField = std::make_shared<sg::GameEngine>(renderer, world);
+	auto gameField = std::make_shared<sg::Engine>(renderer, world);
 	
 	auto generator = std::make_shared<GameObjectsGenerator>();
 	gameField->addProcessor(generator);

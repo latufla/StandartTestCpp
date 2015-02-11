@@ -1,13 +1,13 @@
 #pragma once
-#include "src\gameplay\interface\IGameProcessor.h"
+#include "src\gameplay\interfaces\IProcessor.h"
 
 
-class GameObjectsShooter : public sg::IGameProcessor {
+class GameObjectsShooter : public sg::IProcessor {
 public:
 	GameObjectsShooter() = default;
 	virtual ~GameObjectsShooter();
 
-	virtual bool doStep(sg::IGameEngine* field, long long step) override;
+	virtual bool doStep(sg::IEngine* engine, long long step) override;
 protected:
 	uint32_t score = 0;
 

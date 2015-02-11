@@ -1,12 +1,12 @@
 #pragma once
-#include "src\gameplay\interface\IGameProcessor.h"
+#include "src\gameplay\interfaces\IProcessor.h"
 
-class GameObjectsGenerator : public sg::IGameProcessor {
+class GameObjectsGenerator : public sg::IProcessor {
 public:
 	GameObjectsGenerator();
 	virtual ~GameObjectsGenerator();
 
-	virtual bool doStep(sg::IGameEngine* field, long long step) override;
+	virtual bool doStep(sg::IEngine* engine, long long step) override;
 protected:
 	long long elapsedTime = 0;
 

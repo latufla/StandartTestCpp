@@ -3,17 +3,17 @@
 #include <memory>
 #include "IGameObject.h"
 #include <unordered_map>
-#include "IGameProcessor.h"
+#include "IProcessor.h"
 
 namespace sg {
-	class IGameEngine {
+	class IEngine {
 	public:
 		virtual void addObject(uint32_t id, std::shared_ptr<IGameObject> object) = 0;
 		virtual void removeObject(uint32_t id) = 0;
 
 		virtual std::shared_ptr<IGameObject> getObjectBy(uint32_t id) = 0;
 
-		virtual void addProcessor(std::shared_ptr<IGameProcessor>) = 0;
+		virtual void addProcessor(std::shared_ptr<IProcessor>) = 0;
 
 		virtual bool doStep(long long step) = 0;
 

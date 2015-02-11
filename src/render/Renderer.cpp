@@ -21,6 +21,12 @@ namespace sqr{
 
 		window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1024, 768), "");
 		window->setVerticalSyncEnabled(true);
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
+
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_NORMAL_ARRAY);
 	}
 	
 	Renderer::~Renderer() {
@@ -55,13 +61,7 @@ namespace sqr{
 
 		auto wSize = window->getSize();
 		glViewport(0, 0, wSize.x, wSize.y);
-		
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		glDisableClientState(GL_NORMAL_ARRAY);
-		
+				
 		float ratio = (float)wSize.x / (float)wSize.y;
 		mat4 projection = ortho(-ratio, ratio, -1.f, 1.f);
 		
@@ -90,12 +90,10 @@ namespace sqr{
 				for(auto k : vertices) {
 					auto pos = k->getPosition();
 					vxs.push_back(pos);
-					colors.push_back(color);
 				}
 				//
-
+				glColor4f(color.r, color.g, color.b, color.a);
 				glVertexPointer(3, GL_FLOAT, 3 * sizeof(GLfloat), &vxs[0]);
-				glColorPointer(4, GL_FLOAT, 4 * sizeof(GLfloat), &colors[0]);
 				
 				glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 			}
@@ -104,8 +102,7 @@ namespace sqr{
 		window->pushGLStates();
 		auto scoreField = mainHud->getScoreTextField();
 		window->draw(*(scoreField.get()));
-		window->popGLStates();
-
+		window->popGLStates();	
 		window->display();
 				
 		calcMouseOverObject(projection);

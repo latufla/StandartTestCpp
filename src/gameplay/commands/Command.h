@@ -1,5 +1,5 @@
 #pragma once
-#include "ICommand.h"
+#include "interfaces\ICommand.h"
 #include "..\interfaces\IEngine.h"
 
 namespace sg {

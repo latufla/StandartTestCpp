@@ -92,7 +92,7 @@
     <ClInclude Include="src\gameplay\commands\CreateCommand.h" />
     <ClInclude Include="src\gameplay\commands\Command.h" />
     <ClInclude Include="GameObjectsRemover.h" />
-    <ClInclude Include="src\gameplay\commands\ICommand.h" />
+    <ClInclude Include="src\gameplay\commands\interfaces\ICommand.h" />
     <ClInclude Include="MainHudData.h" />
     <ClInclude Include="MainHud.h" />
     <ClInclude Include="GameObjectsShooter.h" />

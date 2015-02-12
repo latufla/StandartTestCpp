@@ -1,7 +1,7 @@
 #pragma once
 #include "interfaces/IMesh3d.h"
 
-namespace sqr{
+namespace sr{
 	class Vertex3d : public IVertex3d {
 	public:
 		Vertex3d() = delete;

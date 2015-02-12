@@ -1,7 +1,7 @@
 #pragma once
 #include "interfaces/IModel3d.h"
 
-namespace sqr {
+namespace sr {
 	class Model3d : public IModel3d{
 	public:
 		Model3d() = delete;

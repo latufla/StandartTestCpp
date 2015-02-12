@@ -1,7 +1,7 @@
 #pragma once
 #include "interfaces/IView.h"
 
-namespace sqr {
+namespace sr {
 	class View : public IView{
 	public:
 		View() = delete;

@@ -3,18 +3,18 @@
 #include "src\gui\interfaces\IMainHud.h"
 #include "src\render\interfaces\ILoader.h"
 
-class MainHud : public sqr::IMainHud {
+class MainHud : public sr::IMainHud {
 public:
 	MainHud() = delete;
-	MainHud(std::weak_ptr<sqr::ILoader>);
+	MainHud(std::weak_ptr<sr::ILoader>);
 
 	virtual ~MainHud();
 
-	virtual void update(std::shared_ptr<sqr::IMainHudData>) override;
+	virtual void update(std::shared_ptr<sr::IMainHudData>) override;
 	virtual std::shared_ptr<sf::Text> getScoreTextField() override;
 
 protected:
-	std::weak_ptr<sqr::ILoader> assetLoader;
+	std::weak_ptr<sr::ILoader> assetLoader;
 	std::shared_ptr<sf::Text> scoreTextField;
 };
 

@@ -2,7 +2,7 @@
 #include "MainHudData.h"
 
 
-MainHud::MainHud(std::weak_ptr<sqr::ILoader> assetLoader)
+MainHud::MainHud(std::weak_ptr<sr::ILoader> assetLoader)
 	: assetLoader(assetLoader){
 
 	auto sAssetLoader = assetLoader.lock();
@@ -17,7 +17,7 @@ MainHud::MainHud(std::weak_ptr<sqr::ILoader> assetLoader)
 MainHud::~MainHud() {
 }
 
-void MainHud::update(std::shared_ptr<sqr::IMainHudData> data) {
+void MainHud::update(std::shared_ptr<sr::IMainHudData> data) {
 	auto hudData = (MainHudData*)data.get();
 	scoreTextField->setString(std::to_string(hudData->score)); // to_string acts bad on devices
 }

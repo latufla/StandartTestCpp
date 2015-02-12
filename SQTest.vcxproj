@@ -87,6 +87,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\exceptions\Exception.h" />
     <ClInclude Include="src\gameplay\commands\DestroyCommand.h" />
     <ClInclude Include="src\gameplay\commands\CreateCommand.h" />
     <ClInclude Include="src\gameplay\commands\Command.h" />

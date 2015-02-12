@@ -4,7 +4,7 @@
 #include <memory>
 #include <glm.hpp>
 
-namespace sqr {
+namespace sr {
 	class IVertex3d { // sorry bout that - max extensibility, min c++ 
 	public:
 		virtual glm::vec3& getPosition() = 0;

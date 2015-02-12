@@ -4,7 +4,7 @@
 #include "IMainHudData.h"
 #include "SFML/Graphics/Text.hpp"
 
-namespace sqr {
+namespace sr {
 	class IMainHud {
 	public:
 		virtual void update(std::shared_ptr<IMainHudData>) = 0;

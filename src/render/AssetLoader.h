@@ -4,7 +4,7 @@
 
 // default
 
-namespace sqr {
+namespace sr {
 	class AssetLoader : public ILoader{
 	public:
 		AssetLoader();

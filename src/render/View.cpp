@@ -1,7 +1,7 @@
 #include "View.h"
 #include <gtc\matrix_transform.hpp>
 
-namespace sqr{	
+namespace sr{	
 	View::View(std::string modelKeyName, const glm::vec4& color) 
 		: modelKeyName(modelKeyName), color(color) {
 	}

@@ -3,7 +3,7 @@
 #include <glm.hpp>
 #include <string>
 
-namespace sqr {
+namespace sr {
 	class IView {
 	public:
 		virtual std::string getModelKeyName() = 0;

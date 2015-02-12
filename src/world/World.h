@@ -2,11 +2,7 @@
 #include "interfaces\IWorld.h"
 #include <unordered_map>
 
-// default
-// now objects just falling with const speed
-// but it`s still a world simulation
-// use phys engine here if needed
-namespace sqw{
+namespace sw{
 	class World : public IWorld{
 	public:
 		World() = default;
@@ -16,6 +12,7 @@ namespace sqw{
 		virtual void removeObject(uint32_t id) override;
 
 		virtual std::shared_ptr<IObject> getObjectBy(uint32_t id) override;
+		virtual bool hasObject(uint32_t id) override;
 
 		virtual bool doStep(long long step) override;
 

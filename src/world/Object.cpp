@@ -1,6 +1,6 @@
 #include "Object.h"
 
-namespace sqw {
+namespace sw {
 	Object::Object(const glm::mat4& transform, const glm::vec2& speed) 
 		: transform(transform), speed(speed) {
 	}

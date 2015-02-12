@@ -1,7 +1,7 @@
 #pragma once
 #include "../../SharedHeaders.h"
 
-namespace sqr {
+namespace sr {
 	class IMainHudData {
 	};
 }

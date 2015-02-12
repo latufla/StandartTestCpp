@@ -35,7 +35,7 @@ bool GameObjectsGenerator::doStep(sg::IEngine* engine, long long step) {
 	const double defaultSpeed = -0.0001;
 
 	auto objectInfo = std::make_shared<sg::GameObjectInfo>();
-	objectInfo->modelName = sqr::Model3d::DEFAULT_MODEL;
+	objectInfo->modelName = sr::Model3d::DEFAULT_MODEL;
 
 	double rndRadius = (double)std::rand() / RAND_MAX;
 	objectInfo->radius = (float)(defaultRadius + (0.4 - defaultRadius) * rndRadius);

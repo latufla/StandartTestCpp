@@ -9,6 +9,10 @@ namespace sg {
 	DestroyCommand::~DestroyCommand() {
 	}
 
+	bool DestroyCommand::canExecute() {
+		return engine->hasObject(objectId);
+	}
+
 	void DestroyCommand::execute() {
 		engine->removeObject(objectId);
 	}

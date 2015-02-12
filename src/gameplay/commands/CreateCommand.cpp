@@ -13,9 +13,14 @@ namespace sg {
 	CreateCommand::~CreateCommand() {
 	}
 
+	bool CreateCommand::canExecute() {
+		return !engine->hasObject(nextObjectId);
+	}
+
 	void CreateCommand::execute() {
 		auto object = std::make_shared<GameObject>(engine->getRenderer(), engine->getWorld(), nextObjectId, objectInfo, transform);
 		engine->addObject(nextObjectId, object);
 		nextObjectId++;
 	}
+
 }

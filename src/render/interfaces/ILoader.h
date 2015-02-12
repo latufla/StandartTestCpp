@@ -4,7 +4,7 @@
 #include "IModel3d.h"
 #include "SFML/Graphics/Font.hpp"
 
-namespace sqr {
+namespace sr {
 	class ILoader {
 	public:
 		virtual std::shared_ptr<IModel3d> getModel3dBy(std::string keyName) = 0;

@@ -1,7 +1,10 @@
 #include "Engine.h"
+#include "..\exceptions\Exception.h"
+
+using std::to_string;
 
 namespace sg {
-	Engine::Engine(std::shared_ptr<sqr::IRenderEngine> renderer, std::shared_ptr<sqw::IWorld> world)
+	Engine::Engine(std::shared_ptr<sr::IRenderEngine> renderer, std::shared_ptr<sw::IWorld> world)
 		: renderer(renderer), world(world){
 	}
 	
@@ -9,7 +12,9 @@ namespace sg {
 	}
 
 	void Engine::addObject(uint32_t id, std::shared_ptr<IGameObject> object) {
-		idToObject.emplace(id, object);
+		auto res = idToObject.emplace(id, object);
+		if(!res.second)
+			throw sx::InvalidKeyException(EXCEPTION_INFO, to_string(id));
 	}
 
 	void Engine::removeObject(uint32_t id) {
@@ -17,9 +22,17 @@ namespace sg {
 	}
 
 	std::shared_ptr<IGameObject> Engine::getObjectBy(uint32_t id) {
-		return idToObject.at(id);
+		try {
+			return idToObject.at(id);
+		} catch(std::out_of_range&) {
+			throw sx::InvalidKeyException(EXCEPTION_INFO, to_string(id));
+		}
 	}
-	
+
+	bool Engine::hasObject(uint32_t id) {
+		return idToObject.find(id) != idToObject.cend();
+	}
+
 	void Engine::addProcessor(std::shared_ptr<IProcessor> processor) {
 		processors.push_back(processor);
 	}
@@ -39,11 +52,11 @@ namespace sg {
 		return true;
 	}
 
-	std::shared_ptr<sqr::IRenderEngine> Engine::getRenderer() {
+	std::shared_ptr<sr::IRenderEngine> Engine::getRenderer() {
 		return renderer;
 	}
 
-	std::shared_ptr<sqw::IWorld> Engine::getWorld() {
+	std::shared_ptr<sw::IWorld> Engine::getWorld() {
 		return world;
 	}
 

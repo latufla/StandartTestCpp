@@ -9,7 +9,9 @@ namespace sg {
 	public:
 		CreateCommand(IEngine*, std::shared_ptr<GameObjectInfo>, glm::mat4& transform);
 		virtual ~CreateCommand() override;
-	
+
+		virtual bool canExecute() override;
+
 	protected:
 		virtual void execute() override;
 

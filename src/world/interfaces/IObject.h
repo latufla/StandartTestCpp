@@ -2,7 +2,7 @@
 #include "../../SharedHeaders.h"
 #include <glm.hpp>
 
-namespace sqw{
+namespace sw{
 	class IObject {
 	public:
 		virtual glm::mat4& getTransform() = 0;

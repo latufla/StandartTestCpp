@@ -3,7 +3,7 @@
 
 // default
 // DTO, so all fields public
-class MainHudData : public sqr::IMainHudData {
+class MainHudData : public sr::IMainHudData {
 public:
 	MainHudData() = default;
 	virtual ~MainHudData();

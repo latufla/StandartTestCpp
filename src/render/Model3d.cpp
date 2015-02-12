@@ -1,7 +1,7 @@
 #include "Model3d.h"
 
 
-namespace sqr{
+namespace sr{
 	const std::string Model3d::DEFAULT_MODEL = "circle";
 
 	Model3d::Model3d(std::string keyName, std::vector<std::shared_ptr<IMesh3d>>& meshes) 

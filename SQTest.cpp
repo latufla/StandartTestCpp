@@ -17,42 +17,75 @@
 // may have issues here
 #include <thread>
 
+#include "src/exceptions/Exception.h"
+#include <iostream>
+
+void run();
+void handleExceptions();
+
 long long getElapsedTimeMSec();
 void sleep(long long interval);
 
 int _tmain(int argc, _TCHAR* argv[]) {
-	auto assetLoader = std::make_shared<sqr::AssetLoader>();
-	auto mainHud = std::make_shared <MainHud>(assetLoader);
-	auto renderer = std::make_shared<sqr::Renderer>(assetLoader, mainHud);
+	try {
+		run();
+	} catch(...) {
+		handleExceptions();
+	}
 
-	auto world = std::make_shared<sqw::World>();
-	
+	return 0;
+}
+
+void run() {
+	auto assetLoader = std::make_shared<sr::AssetLoader>();
+	auto mainHud = std::make_shared <MainHud>(assetLoader);
+	auto renderer = std::make_shared<sr::Renderer>(assetLoader, mainHud);
+
+	auto world = std::make_shared<sw::World>();
+
 	auto gameField = std::make_shared<sg::Engine>(renderer, world);
-	
+
 	auto generator = std::make_shared<GameObjectsGenerator>();
 	gameField->addProcessor(generator);
-	
+
 	auto shooter = std::make_shared<GameObjectsShooter>();
 	gameField->addProcessor(shooter);
 
 	auto eol = std::make_shared<GameObjectsRemover>();
 	gameField->addProcessor(eol);
-	
+
 	const uint32_t step = 1000 / 60;
 	long long lastStepTime = getElapsedTimeMSec();
 	bool running = true;
 	while(running) {
 		long long elapsedTime = getElapsedTimeMSec() - lastStepTime;
-		if(elapsedTime >= step) {						
+		if(elapsedTime >= step) {
 			running = gameField->doStep(step);
 			lastStepTime = getElapsedTimeMSec() - (elapsedTime - step);
-		}
-		else {
+		} else {
 			sleep(step - elapsedTime);
 		}
 	}
-	return 0;
 }
+
+void handleExceptions() {
+	std::string error = "";
+	try {
+		throw;
+	} catch(sx::Exception& e) {
+		error = e.msg();
+	} catch(std::exception& e) {
+		error = e.what();
+	} catch(...) {
+		error = "unknown exception";
+	}
+
+	if(error != "") {
+		std::cout << error;
+		std::exit(1);
+	}
+}
+
 
 long long getElapsedTimeMSec() {
 	using namespace std::chrono;
@@ -66,5 +99,4 @@ long long getElapsedTimeMSec() {
 void sleep(long long interval) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(interval));
 }
-
 

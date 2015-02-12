@@ -3,8 +3,10 @@
 #include <SFML/OpenGL.hpp>
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
+#include "../exceptions/Exception.h"
 
 using std::shared_ptr;
+using std::to_string;
 
 using glm::vec2;
 using glm::vec3;
@@ -15,8 +17,8 @@ using glm::dot;
 using glm::inverse;
 using glm::ortho;
 
-namespace sqr{
-	Renderer::Renderer(shared_ptr<ILoader> assetLoader, std::shared_ptr<sqr::IMainHud> mainHud)
+namespace sr{
+	Renderer::Renderer(shared_ptr<ILoader> assetLoader, std::shared_ptr<sr::IMainHud> mainHud)
 		:assetLoader(assetLoader), mainHud(mainHud) {
 
 		window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1024, 768), "");
@@ -34,7 +36,9 @@ namespace sqr{
 	}
 
 	void Renderer::addObject(uint32_t id, shared_ptr<IView> object) {
-		idToObject.emplace(id, object);
+		auto res = idToObject.emplace(id, object);
+		if(!res.second)
+			throw sx::InvalidKeyException(EXCEPTION_INFO, to_string(id));
 	}
 
 	void Renderer::removeObject(uint32_t id) {
@@ -42,8 +46,17 @@ namespace sqr{
 	}
 
 	shared_ptr<IView> Renderer::getObjectBy(uint32_t id) {
-		return idToObject.at(id);
+		try {
+			return idToObject.at(id);
+		} catch(std::out_of_range&) {
+			throw sx::InvalidKeyException(EXCEPTION_INFO, to_string(id));
+		}
 	}
+
+	bool Renderer::hasObject(uint32_t id) {
+		return idToObject.find(id) != idToObject.cend();
+	}
+
 
 	bool Renderer::doStep(long long step) {
 		if(!window->isOpen())
@@ -105,7 +118,7 @@ namespace sqr{
 		return mouseOver;
 	}
 	
-	std::shared_ptr<sqr::IMainHud> Renderer::getMainHud() {
+	std::shared_ptr<sr::IMainHud> Renderer::getMainHud() {
 		return mainHud;
 	}
 
@@ -174,5 +187,4 @@ namespace sqr{
 		glm::vec2 res{wSize.x, wSize.y};
 		return res;
 	}
-
 }

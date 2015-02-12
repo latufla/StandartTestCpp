@@ -4,7 +4,7 @@
 #include <memory>
 #include "IMesh3d.h"
 
-namespace sqr {
+namespace sr {
 	class IModel3d {
 	public:
 		virtual std::vector<std::shared_ptr<IMesh3d>>& getMeshes() = 0;

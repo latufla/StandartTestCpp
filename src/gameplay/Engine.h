@@ -7,7 +7,7 @@ namespace sg {
 	class Engine : public IEngine{
 	public:
 		Engine() = delete;
-		Engine(std::shared_ptr<sqr::IRenderEngine> renderer, std::shared_ptr<sqw::IWorld> world);
+		Engine(std::shared_ptr<sr::IRenderEngine> renderer, std::shared_ptr<sw::IWorld> world);
 
 		virtual ~Engine();
 
@@ -15,13 +15,14 @@ namespace sg {
 		virtual void removeObject(uint32_t id) override;
 
 		virtual std::shared_ptr<IGameObject> getObjectBy(uint32_t id) override;
+		virtual bool hasObject(uint32_t id) override;
 
 		virtual void addProcessor(std::shared_ptr<IProcessor>) override;
 
 		virtual bool doStep(long long step) override;
 
-		virtual std::shared_ptr<sqr::IRenderEngine> getRenderer() override;
-		virtual std::shared_ptr<sqw::IWorld> getWorld() override;
+		virtual std::shared_ptr<sr::IRenderEngine> getRenderer() override;
+		virtual std::shared_ptr<sw::IWorld> getWorld() override;
 
 		virtual std::unordered_map<uint32_t, std::shared_ptr<IGameObject>>& getObjects() override;
 
@@ -29,8 +30,8 @@ namespace sg {
 		std::unordered_map<uint32_t, std::shared_ptr<IGameObject>> idToObject;
 		std::vector<std::shared_ptr<IProcessor>> processors;
 
-		std::shared_ptr<sqr::IRenderEngine> renderer;
-		std::shared_ptr<sqw::IWorld> world;
+		std::shared_ptr<sr::IRenderEngine> renderer;
+		std::shared_ptr<sw::IWorld> world;
 	};
 }
 

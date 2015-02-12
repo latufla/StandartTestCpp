@@ -10,11 +10,11 @@
 
 // default
 // should impl one more connector to sfml and gl
-namespace sqr {
+namespace sr {
 	class Renderer : public IRenderEngine {
 	public:
 		Renderer() = delete;
-		Renderer(std::shared_ptr<ILoader> assetLoader, std::shared_ptr<sqr::IMainHud>);
+		Renderer(std::shared_ptr<ILoader> assetLoader, std::shared_ptr<sr::IMainHud>);
 
 		virtual ~Renderer();
 	
@@ -22,6 +22,7 @@ namespace sqr {
 		virtual void removeObject(uint32_t id) override;
 
 		virtual std::shared_ptr<IView> getObjectBy(uint32_t id) override;
+		virtual bool hasObject(uint32_t id) override;
 
 		virtual bool doStep(long long step) override;
 
@@ -30,7 +31,7 @@ namespace sqr {
 		
 		virtual glm::vec2 getWindowSize() override;
 
-		virtual std::shared_ptr<sqr::IMainHud> getMainHud() override;
+		virtual std::shared_ptr<sr::IMainHud> getMainHud() override;
 	protected:
 		int32_t mouseOver;
 
@@ -41,6 +42,6 @@ namespace sqr {
 		std::map<uint32_t, std::shared_ptr<IView>> idToObject;
 
 		std::shared_ptr<sf::RenderWindow> window;
-		std::shared_ptr<sqr::IMainHud> mainHud;
+		std::shared_ptr<sr::IMainHud> mainHud;
 	};
 }

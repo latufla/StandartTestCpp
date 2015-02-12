@@ -1,7 +1,7 @@
 #pragma once
 #include "interfaces\IObject.h"
 
-namespace sqw{
+namespace sw{
 	class Object : public IObject{
 	public:
 		Object(const glm::mat4& transform, const glm::vec2& speed);

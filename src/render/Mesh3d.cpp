@@ -1,7 +1,7 @@
 #include "Mesh3d.h"
 
 
-namespace sqr{
+namespace sr{
 
 	Mesh3d::Mesh3d(std::string name, std::vector<std::shared_ptr<IVertex3d>> vertices, std::vector<uint16_t> indices) 
 		: name(name), vertices(vertices), indices(indices) {

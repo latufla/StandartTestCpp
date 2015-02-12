@@ -2,7 +2,7 @@
 #include "interfaces/IMesh3d.h"
 
 // default
-namespace sqr {
+namespace sr {
 	class Mesh3d : public IMesh3d{
 	public:
 		Mesh3d() = delete;

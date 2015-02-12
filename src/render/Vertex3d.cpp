@@ -1,7 +1,7 @@
 #include "Vertex3d.h"
 
 
-namespace sqr{	
+namespace sr{	
 	Vertex3d::Vertex3d(const glm::vec3& position)
 		: position(position) {
 	}

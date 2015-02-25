@@ -54,17 +54,12 @@ void run() {
 	auto eol = std::make_shared<GameObjectsRemover>();
 	gameField->addProcessor(eol);
 
-	const uint32_t step = 1000 / 60;
-	long long lastStepTime = getElapsedTimeMSec();
+	long long step = 1000 / 30;
 	bool running = true;
 	while(running) {
-		long long elapsedTime = getElapsedTimeMSec() - lastStepTime;
-		if(elapsedTime >= step) {
-			running = gameField->doStep(step);
-			lastStepTime = getElapsedTimeMSec() - (elapsedTime - step);
-		} else {
-			sleep(step - elapsedTime);
-		}
+		long long startTime = getElapsedTimeMSec();
+		running = gameField->doStep(step);
+		step = getElapsedTimeMSec() - startTime;
 	}
 }
 
